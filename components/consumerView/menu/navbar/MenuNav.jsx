@@ -1,6 +1,8 @@
 import Popup from "reactjs-popup";
 import { useRef } from "react";
 import MenuButton from "./MenuButton";
+import Link from "next/link";
+
 export default function MenuNav() {
   const ref = useRef();
   const closeMenu = () => ref.current.close();
@@ -52,12 +54,12 @@ export default function MenuNav() {
           </Popup>
         </li>
         <li className="w-[50%] h-full flex items-center justify-center">
-          <a
+          <Link
             className="w-[50%] flex h-full items-center justify-center text-center"
-            href="/salads"
+            href="/checkout"
           >
             Checkout
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>
