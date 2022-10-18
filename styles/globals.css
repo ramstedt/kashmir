@@ -1,13 +1,115 @@
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@font-face {
+  font-family: "DM Sans";
+  font-weight: 400;
+  src: url("../public/fonts/DMSans-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "DM Sans Medium";
+  font-weight: 500;
+  src: url("../public/fonts/DMSans-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "DM Sans Bold";
+  font-weight: 700;
+  src: url("../public/fonts/DMSans-Bold.woff2");
+}
+
+@font-face {
+  font-family: "Mulish";
+  font-weight: 400;
+  src: url("../public/fonts/Mulish-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Mulish Light";
+  font-weight: 500;
+  src: url("../public/fonts/Mulish-Light.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Mulish Medium";
+  font-weight: 700;
+  src: url("../public/fonts/Mulish-Medium.woff2");
+}
+@font-face {
+  font-family: "Mulish Bold";
+  font-weight: 700;
+  src: url("../public/fonts/Mulish-Bold.woff2");
+}
+
+@layer base {
+  html,
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    @apply text-bluebell;
+    @apply bg-cultured;
+    @apply font-Mulish;
+  }
+
+  h1 {
+    @apply font-DMSansMedium;
+    @apply text-[30px];
+  }
+
+  h4,
+  h5 {
+    @apply font-MulishMedium;
+  }
+
+  h1,
+  h2,
+  h4,
+  h6 {
+    @apply text-cobalt;
+  }
+
+  h2,
+  h3,
+  h6 {
+    @apply font-MulishBold;
+  }
+
+  h3 {
+    @apply text-[24px];
+  }
+
+  h3,
+  h4 {
+    @apply text-pumpkin;
+  }
+
+  h5 {
+    @apply text-bluebell;
+    @apply text-xs;
+    @apply mb-2;
+  }
+
+  h6 {
+    @apply text-[20px];
+  }
+
+  input {
+    @apply border-solid;
+    @apply h-2;
+  }
+
+  table,
+  td {
+    @apply border;
+    @apply border-solid;
+    @apply border-cobalt;
+  }
+  tr:nth-child(even) {
+    @apply bg-red-200;
+  }
 }
 
 a {
@@ -15,6 +117,9 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+table {
+  text-align: left;
 }
+
+@tailwind components;
+@tailwind utilities;
