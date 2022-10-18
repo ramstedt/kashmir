@@ -1,6 +1,7 @@
 import MenuWrapper from "../components/consumerView/menu/MenuWrapper";
 import MenuItemCard from "../components/consumerView/menu/MenuItemCard";
 import { supabase } from "../utils/supabase";
+import useCart from "../hooks/useCart";
 
 export const getStaticProps = async () => {
   let { data: menuitems } = await supabase
@@ -15,6 +16,7 @@ export const getStaticProps = async () => {
 };
 
 export default function Home({ menuitems }) {
+  const { cart, addItemToCart } = useCart();
   return (
     <MenuWrapper>
       <h1>Kashmir</h1>
@@ -28,6 +30,7 @@ export default function Home({ menuitems }) {
           vegetarian={item.is_vegetarian ? "vegetarian" : ""}
           nuts={item.contains_nuts ? "contains nuts" : ""}
           glutenFree={item.is_gluten_free ? "gluten free" : ""}
+          addToCart={() => addItemToCart(item.id)}
         />
       ))}
     </MenuWrapper>
