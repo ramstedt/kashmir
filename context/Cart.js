@@ -21,15 +21,15 @@ export default function Cart({ children }) {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const addItemToCart = (id, qty = 1) => {
-    const item = cart.find((i) => i.id === id);
+  const addItemToCart = (product, qty = 1) => {
+    const item = cart.find((i) => i.id === product.id);
 
     if (item) {
-      //increase qty
+      //increase quantity
       item.qty += qty;
       setCart([...cart]);
     } else {
-      setCart([...cart, { id, qty }]);
+      setCart([...cart, { ...product, qty }]);
     }
   };
   const removeItemFromCart = (id) => {

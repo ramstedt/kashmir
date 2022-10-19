@@ -2,10 +2,12 @@ import Popup from "reactjs-popup";
 import { useRef } from "react";
 import MenuButton from "./MenuButton";
 import Link from "next/link";
+import useCart from "../../../../hooks/useCart";
 
 export default function MenuNav() {
   const ref = useRef();
   const closeMenu = () => ref.current.close();
+  const { cart } = useCart();
   return (
     <nav className="fixed bottom-0 z-[999] w-full bg-spaceCadet text-white font-MulishBold h-14 rounded-t-md">
       <ul className="flex h-full justify-around items-center content-center text-center">
@@ -54,12 +56,37 @@ export default function MenuNav() {
           </Popup>
         </li>
         <li className="w-[50%] h-full flex items-center justify-center">
-          <Link
-            className="w-[50%] flex h-full items-center justify-center text-center"
-            href="/checkout"
+          <Popup
+            trigger={
+              <div className="menu-item w-[50%] flex h-full items-center justify-center text-center">
+                Your order
+              </div>
+            }
+            position="top"
+            on="click"
+            ref={ref}
+            contentStyle={{ padding: "0px", border: "none" }}
+            arrow={true}
           >
-            Checkout
-          </Link>
+            <div className="fixed w-full h-full bg-cultured top-0 left-0 p-10">
+              <div className="fixed p-2 top-0 right-0" onClick={closeMenu}>
+                <span className="m-2 text-xl">X</span>
+              </div>
+              <div>
+                {cart.map((item) => {
+                  return (
+                    <>
+                      <div>
+                        {item.qty} x {item.name} {item.price * item.qty} kr + -
+                      </div>
+                    </>
+                  );
+                })}
+                <div>Total: {}</div>
+                <button>Place order</button>
+              </div>
+            </div>
+          </Popup>
         </li>
       </ul>
     </nav>

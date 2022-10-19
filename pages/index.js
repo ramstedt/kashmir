@@ -15,22 +15,26 @@ export const getStaticProps = async () => {
   };
 };
 
+const Test = () => {
+  const { cart, addItemToCart } = useCart();
+};
+
 export default function Home({ menuitems }) {
   const { cart, addItemToCart } = useCart();
   return (
     <MenuWrapper>
       <h1>Kashmir</h1>
-      {menuitems?.map((item) => (
+      {menuitems?.map((product) => (
         <MenuItemCard
-          key={item.id}
-          title={item.name}
-          price={item.price}
-          description={item.description}
-          vegan={item.is_vegan ? "vegan" : ""}
-          vegetarian={item.is_vegetarian ? "vegetarian" : ""}
-          nuts={item.contains_nuts ? "contains nuts" : ""}
-          glutenFree={item.is_gluten_free ? "gluten free" : ""}
-          addToCart={() => addItemToCart(item.id)}
+          key={product.id}
+          title={product.name}
+          price={product.price}
+          description={product.description}
+          vegan={product.is_vegan ? "vegan" : ""}
+          vegetarian={product.is_vegetarian ? "vegetarian" : ""}
+          nuts={product.contains_nuts ? "contains nuts" : ""}
+          glutenFree={product.is_gluten_free ? "gluten free" : ""}
+          addToCart={() => addItemToCart(product)}
         />
       ))}
     </MenuWrapper>
