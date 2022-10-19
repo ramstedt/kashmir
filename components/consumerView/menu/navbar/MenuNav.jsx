@@ -6,6 +6,7 @@ import useCart from "../../../../hooks/useCart";
 import { TbSeedingOff, TbEgg } from "react-icons/tb";
 import { RiLeafFill } from "react-icons/ri";
 import { GiPeanut } from "react-icons/gi";
+import AllergyLegend from "../allergyLegend/AllergyLegend";
 
 export default function MenuNav() {
   const ref = useRef();
@@ -107,6 +108,7 @@ export default function MenuNav() {
                 <div>Total: {}</div>
                 <button>Place order</button>
               </div>
+              <AllergyLegend />
             </div>
           </Popup>
         </li>
