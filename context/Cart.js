@@ -1,11 +1,49 @@
-import { createContext } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const Context = createContext();
 
 export default function Cart({ children }) {
-  const exposed = {
-    test: "hello i am test",
+  const getExistingCart = () => JSON.parse(localStorage.getItem("cart"));
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    //check if cart exists
+    const existingCart = getExistingCart();
+    console.log(getExistingCart());
+    // console.log(`hej ${JSON.stringify(existingCart)}`);
+    if (existingCart) {
+      setCart(existingCart);
+    }
+  }, []);
+
+  useEffect(() => {
+    // write to local storage
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const addItemToCart = (id, qty = 1) => {
+    const item = cart.find((i) => i.id === id);
+
+    if (item) {
+      //increase qty
+      item.qty += qty;
+      setCart([...cart]);
+    } else {
+      setCart([...cart, { id, qty }]);
+    }
   };
+  const removeItemFromCart = (id) => {
+    const newCart = cart.filter((item) => {
+      return item.id !== id;
+    });
+    setCart(newCart);
+  };
+  const exposed = {
+    cart,
+    addItemToCart,
+    removeItemFromCart,
+  };
+
   return (
     <>
       <Context.Provider value={exposed}>{children}</Context.Provider>
