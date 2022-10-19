@@ -13,18 +13,18 @@ export default function FoodItemCard({
   nuts,
   addToCart,
 }) {
-  let [count, setCount] = useState(1);
-  function incrementCount() {
-    count = count + 1;
-    setCount(count);
-  }
-  function decrementCount() {
-    count = count - 1;
-    if (count <= 0) {
-      count = 0;
-    }
-    setCount(count);
-  }
+  // let [count, setCount] = useState(1);
+  // function incrementCount() {
+  //   count = count + 1;
+  //   setCount(count);
+  // }
+  // function decrementCount() {
+  //   count = count - 1;
+  //   if (count <= 0) {
+  //     count = 0;
+  //   }
+  //   setCount(count);
+  // }
   return (
     <div suppressHydrationWarning={true}>
       <Popup
@@ -65,16 +65,18 @@ export default function FoodItemCard({
                 <div className="text-pumpkin my-3">
                   {vegan} {vegetarian} {nuts} {glutenFree}
                 </div>
-                <div className="flex justify-between items-center w-[200px] mt-5">
-                  <button onClick={decrementCount}>-</button>
-                  <div>{count}</div>
-                  <button onClick={incrementCount}>+</button>
+                <div className="flex justify-start mt-10">
                   <button
                     onClick={addToCart}
-                    className="ml-5 bg-spaceCadet text-white border-solid border-2 border-spaceCadet px-2 py-2 m-1 rounded-2xl"
+                    className="bg-spaceCadet text-white border-solid border-2 border-spaceCadet px-2 py-2 rounded-2xl"
                   >
                     Add to order
                   </button>
+                </div>
+                <div className="mt-5">
+                  {/* <button onClick={decrementCount}>-</button>
+                  <div>{count}</div>
+                  <button onClick={incrementCount}>+</button> */}
                 </div>
               </div>
             </div>

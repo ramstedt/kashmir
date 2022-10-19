@@ -15,12 +15,9 @@ export const getStaticProps = async () => {
   };
 };
 
-const Test = () => {
-  const { cart, addItemToCart } = useCart();
-};
-
 export default function Home({ menuitems }) {
   const { cart, addItemToCart } = useCart();
+
   return (
     <MenuWrapper>
       <h1>Kashmir</h1>

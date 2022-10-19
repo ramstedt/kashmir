@@ -3,6 +3,9 @@ import { useRef } from "react";
 import MenuButton from "./MenuButton";
 import Link from "next/link";
 import useCart from "../../../../hooks/useCart";
+import { TbSeedingOff, TbEgg } from "react-icons/tb";
+import { RiLeafFill } from "react-icons/ri";
+import { GiPeanut } from "react-icons/gi";
 
 export default function MenuNav() {
   const ref = useRef();
@@ -68,20 +71,39 @@ export default function MenuNav() {
             contentStyle={{ padding: "0px", border: "none" }}
             arrow={true}
           >
-            <div className="fixed w-full h-full bg-cultured top-0 left-0 p-10">
+            <div className="fixed w-full h-full bg-cultured top-0 left-0 p-5 pt-10">
               <div className="fixed p-2 top-0 right-0" onClick={closeMenu}>
                 <span className="m-2 text-xl">X</span>
               </div>
               <div>
-                {cart.map((item) => {
-                  return (
-                    <>
+                <h2>Your order</h2>
+              </div>
+              <div>
+                <div className="flex flex-col gap-5">
+                  {cart.map((item) => {
+                    console.log(item);
+                    return (
                       <div>
-                        {item.qty} x {item.name} {item.price * item.qty} kr + -
+                        <div className="flex justify-between">
+                          <div>{item.name}</div>
+                          <div>{item.price * item.qty} kr</div>
+                        </div>
+                        <div className="flex justify-start">
+                          <div>
+                            {item.is_gluten_free ? <TbSeedingOff /> : ""}
+                          </div>
+                          <div> {item.is_vegan ? <RiLeafFill /> : ""}</div>
+                          <div> {item.is_vegetarian ? <TbEgg /> : ""}</div>
+                          <div> {item.contains_nuts ? <GiPeanut /> : ""}</div>
+                        </div>
+
+                        <div className="flex justify-end">
+                          <button>-</button> {item.qty} +
+                        </div>
                       </div>
-                    </>
-                  );
-                })}
+                    );
+                  })}
+                </div>
                 <div>Total: {}</div>
                 <button>Place order</button>
               </div>

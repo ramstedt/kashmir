@@ -6,6 +6,19 @@ export default function Cart({ children }) {
   const getExistingCart = () => JSON.parse(localStorage.getItem("cart"));
   const [cart, setCart] = useState([]);
 
+  let [count, setCount] = useState(1);
+  const incrementCount = () => {
+    count = count + 1;
+    setCount(count);
+  };
+  const decrementCount = () => {
+    count = count - 1;
+    if (count <= 0) {
+      count = 0;
+    }
+    setCount(count);
+  };
+
   useEffect(() => {
     //check if cart exists
     const existingCart = getExistingCart();
@@ -21,7 +34,7 @@ export default function Cart({ children }) {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const addItemToCart = (product, qty = 1) => {
+  const addItemToCart = (product, qty = count) => {
     const item = cart.find((i) => i.id === product.id);
 
     if (item) {
