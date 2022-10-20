@@ -55,11 +55,17 @@ export default function Cart({ children }) {
     });
     setCart(newCart);
   };
+
+  const emptyCart = () => {
+    localStorage.removeItem("cart");
+    setCart([]);
+  };
   const exposed = {
     cart,
     addItemToCart,
     removeItemFromCart,
     total,
+    emptyCart,
   };
 
   return (

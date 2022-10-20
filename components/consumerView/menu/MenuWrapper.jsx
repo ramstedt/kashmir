@@ -1,4 +1,4 @@
-import MenuNav from "./navbar/MenuNav";
+import MenuNav from "../navbar/MenuNav";
 
 export default function ConsumerWrapper({ children }) {
   return (

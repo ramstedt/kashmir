@@ -2,12 +2,16 @@ import Popup from "reactjs-popup";
 import { useRef } from "react";
 import MenuButton from "./MenuButton";
 import Link from "next/link";
+import useCart from "../../../hooks/useCart";
+import { TbSeedingOff, TbEgg } from "react-icons/tb";
+import { RiLeafFill } from "react-icons/ri";
+import { GiPeanut } from "react-icons/gi";
 import AllergyLegend from "../menu/allergyLegend/AllergyLegend";
-import CartInfo from "../../cart/CartInfo";
 
 export default function MenuNav() {
   const ref = useRef();
   const closeMenu = () => ref.current.close();
+  const { cart, total } = useCart();
 
   return (
     <nav className="fixed bottom-0 z-[999] w-full bg-spaceCadet text-white font-MulishBold h-14 rounded-t-md">
@@ -78,7 +82,28 @@ export default function MenuNav() {
               </div>
               <div>
                 <div className="flex flex-col gap-5">
-                  <CartInfo />
+                  {cart.map((item) => {
+                    return (
+                      <div key={item.id}>
+                        <div className="flex justify-between">
+                          <div>{item.name}</div>
+                          <div>{item.price * item.qty} kr</div>
+                        </div>
+                        <div className="flex justify-start">
+                          <div>
+                            {item.is_gluten_free ? <TbSeedingOff /> : ""}
+                          </div>
+                          <div> {item.is_vegan ? <RiLeafFill /> : ""}</div>
+                          <div> {item.is_vegetarian ? <TbEgg /> : ""}</div>
+                          <div> {item.contains_nuts ? <GiPeanut /> : ""}</div>
+                        </div>
+
+                        <div className="flex justify-end">
+                          <button>-</button> {item.qty} +
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
                 <div>Total: {total}</div>
                 <Link href="/checkout">
