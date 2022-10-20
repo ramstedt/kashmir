@@ -5,6 +5,7 @@ export const Context = createContext();
 export default function Cart({ children }) {
   const getExistingCart = () => JSON.parse(localStorage.getItem("cart"));
   const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState(0);
 
   let [count, setCount] = useState(1);
   const incrementCount = () => {
@@ -32,6 +33,9 @@ export default function Cart({ children }) {
   useEffect(() => {
     // write to local storage
     localStorage.setItem("cart", JSON.stringify(cart));
+    let calcTotal = 0;
+    cart.forEach((item) => (calcTotal += item.price * item.qty));
+    setTotal(calcTotal);
   }, [cart]);
 
   const addItemToCart = (product, qty = count) => {
@@ -55,6 +59,7 @@ export default function Cart({ children }) {
     cart,
     addItemToCart,
     removeItemFromCart,
+    total,
   };
 
   return (

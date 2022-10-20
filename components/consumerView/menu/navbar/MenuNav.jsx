@@ -11,7 +11,8 @@ import AllergyLegend from "../allergyLegend/AllergyLegend";
 export default function MenuNav() {
   const ref = useRef();
   const closeMenu = () => ref.current.close();
-  const { cart } = useCart();
+  const { cart, total } = useCart();
+
   return (
     <nav className="fixed bottom-0 z-[999] w-full bg-spaceCadet text-white font-MulishBold h-14 rounded-t-md">
       <ul className="flex h-full justify-around items-center content-center text-center">
@@ -84,7 +85,7 @@ export default function MenuNav() {
                   {cart.map((item) => {
                     console.log(item);
                     return (
-                      <div>
+                      <div key={item.id}>
                         <div className="flex justify-between">
                           <div>{item.name}</div>
                           <div>{item.price * item.qty} kr</div>
@@ -105,8 +106,10 @@ export default function MenuNav() {
                     );
                   })}
                 </div>
-                <div>Total: {}</div>
-                <button>Place order</button>
+                <div>Total: {total}</div>
+                <Link href="/checkout">
+                  <button>Place order</button>
+                </Link>
               </div>
               <AllergyLegend />
             </div>
