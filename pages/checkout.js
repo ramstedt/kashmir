@@ -1,3 +1,4 @@
+import User from "../components/user/User";
 import CartInfo from "../components/consumerView/cart/CartInfo";
 import useCart from "../hooks/useCart";
 import { useState, useEffect } from "react";
@@ -63,6 +64,9 @@ export default function Checkout() {
       ) : (
         <>
           <h1>checkout</h1>
+          <p>you are signed in as</p>
+          {console.log(session)}
+          <User email={session.user.email} />
           {cart.length > 0 ? (
             <>
               <CartInfo />
