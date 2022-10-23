@@ -1,7 +1,9 @@
 import CartInfo from "../components/consumerView/cart/CartInfo";
 import useCart from "../hooks/useCart";
+import { useState, useEffect } from "react";
+import { supabase } from "../utils/supabase";
+import Auth from "../components/auth/Auth";
 import { loadStripe } from "@stripe/stripe-js";
-import { useEffect } from "react";
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(
@@ -25,25 +27,60 @@ export default function Checkout() {
     }
   }, []);
 
+  const [session, setSession] = useState(null);
+  const [loading, setLoading] = useState(false);
+  //check if logged in
+  useEffect(() => {
+    let mounted = true;
+    async function getInitialSession() {
+      setLoading(true);
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (mounted) {
+        if (session) {
+          setSession(session);
+        }
+      }
+      setLoading(false);
+    }
+    getInitialSession();
+    const { subscription } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setSession(session);
+      }
+    );
+    return () => {
+      mounted = false;
+      subscription?.unsubscribe();
+    };
+  }, []);
+
   return (
     <>
-      <h1>checkout</h1>
-      {cart.length > 0 ? (
-        <>
-          <CartInfo />
-          <form action="/api/checkout_sessions" method="POST">
-            <section>
-              <button type="submit" role="link">
-                Checkout
-              </button>
-            </section>
-          </form>
-        </>
+      {!session ? (
+        <Auth />
       ) : (
-        <p>
-          Your order is currently empty. Please browse the menu and add
-          something to your order.
-        </p>
+        <>
+          <h1>checkout</h1>
+          {cart.length > 0 ? (
+            <>
+              <CartInfo />
+              <form action="/api/checkout_sessions" method="POST">
+                <section>
+                  <button type="submit" role="link">
+                    Checkout
+                  </button>
+                </section>
+              </form>
+            </>
+          ) : (
+            <p>
+              Your order is currently empty. Please browse the menu and add
+              something to your order.
+            </p>
+          )}
+        </>
       )}
     </>
   );
