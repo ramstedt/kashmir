@@ -20,7 +20,7 @@ export default function MenuNav() {
           <Popup
             trigger={
               <div className="menu-item w-[50%] flex h-full items-center justify-center text-center">
-                Menu
+                <button className="h-full w-full">Your order</button>
               </div>
             }
             position="top"
@@ -64,7 +64,7 @@ export default function MenuNav() {
           <Popup
             trigger={
               <div className="menu-item w-[50%] flex h-full items-center justify-center text-center">
-                Your order
+                <button className="h-full w-full">Your order</button>
               </div>
             }
             position="top"
