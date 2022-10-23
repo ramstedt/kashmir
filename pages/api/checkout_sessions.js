@@ -41,17 +41,3 @@ export default async function handler(req, res) {
     res.status(405).end("Method Not Allowed");
   }
 }
-
-// this was in checkout page:
-
-// const processPayment = async () => {
-//     const url = "./api/create-stripe-session";
-//     const newCart = cart.map(({ id, qty }) => ({
-//       id,
-//       qty,
-//     }));
-
-//     const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
-//     const { data } = await axios.post(url, { cart: newCart });
-//     await stripe.redirectToCheckout({ sessionId: data.id });
-//   };
