@@ -5,6 +5,7 @@ import { GiPeanut } from "react-icons/gi";
 
 export default function CartInfo() {
   const { cart, total } = useCart();
+  console.log(cart);
   return (
     <>
       {cart.map((item) => {

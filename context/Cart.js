@@ -23,8 +23,7 @@ export default function Cart({ children }) {
   useEffect(() => {
     //check if cart exists
     const existingCart = getExistingCart();
-    console.log(getExistingCart());
-    // console.log(`hej ${JSON.stringify(existingCart)}`);
+
     if (existingCart) {
       setCart(existingCart);
     }
