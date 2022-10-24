@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { supabase } from "../../utils/supabase";
 
 export default function Auth() {
@@ -13,13 +12,9 @@ export default function Auth() {
   };
   return (
     <div>
-      <h1>Log in or Sign up</h1>
-      <p>sign in via magic link</p>
-      <form
-        onSubmit={handleLogin}
-        method="get"
-        className="flex flex-col space-y-3"
-      >
+      <h1>Welcome to Kashmir</h1>
+      <p>Please enter your email to view the menu and process an order</p>
+      <form onSubmit={handleLogin} className="flex flex-col space-y-3">
         <div className="flex flex-col">
           <label htmlFor="email">Email</label>
           <input type="email" id="email" name="email" className="h-8" />
@@ -28,6 +23,7 @@ export default function Auth() {
           <button type="submit">Log in</button>
         </div>
       </form>
+      <p>The link to the menu will be sent to your email </p>
     </div>
   );
 }
