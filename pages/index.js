@@ -17,13 +17,12 @@ export const getStaticProps = async () => {
   };
 };
 
-export default function Menu({ menuitems, session }) {
+export default function Menu({ menuitems }) {
   const { cart, addItemToCart } = useCart();
   return (
     <>
       <MenuWrapper>
         <h1>Kashmir</h1>
-        <p>{/* <button onClick={handleLogout}>log out</button> */}</p>
         {menuitems?.map((product) => (
           <MenuItemCard
             key={product.id}

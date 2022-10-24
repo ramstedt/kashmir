@@ -35,6 +35,8 @@ function MyApp({ Component, pageProps }) {
       subscription?.unsubscribe();
     };
   }, []);
+
+  console.log(session);
   return (
     <>
       {!session ? (

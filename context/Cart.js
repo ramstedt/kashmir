@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { supabase } from "../utils/supabase";
 
 export const Context = createContext();
 
@@ -29,6 +30,13 @@ export default function Cart({ children }) {
     }
   }, []);
 
+  const fetchsupaCart = async () => {
+    const { data: cart } = await supabase
+      .from("carts")
+      .select("*")
+      .eq("user_id", supabase.auth.session().user.id);
+  };
+
   useEffect(() => {
     // write to local storage
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -37,7 +45,7 @@ export default function Cart({ children }) {
     setTotal(calcTotal);
   }, [cart]);
 
-  const addItemToCart = (product, qty = count) => {
+  const addItemToCart = async (product, qty = count) => {
     const item = cart.find((i) => i.id === product.id);
 
     if (item) {
@@ -47,6 +55,14 @@ export default function Cart({ children }) {
     } else {
       setCart([...cart, { ...product, qty }]);
     }
+
+    await supabase.from("carts").insert([
+      {
+        menuitem_id: product.id,
+        quantity: qty,
+        user_id: supabase.auth.session().user.id,
+      },
+    ]);
   };
   const removeItemFromCart = (id) => {
     const newCart = cart.filter((item) => {

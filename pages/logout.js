@@ -5,11 +5,11 @@ import { useRouter } from "next/router";
 const Logout = () => {
   const router = useRouter();
   useEffect(() => {
-    async function logout() {
+    async function logoutUser() {
       await supabase.auth.signOut();
       router.push("/");
     }
-    logout();
+    logoutUser();
   });
   return <p>Logging you out</p>;
 };
