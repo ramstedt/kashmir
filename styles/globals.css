@@ -117,6 +117,10 @@ a {
   text-decoration: none;
 }
 
+.menuItem::first-letter {
+  text-transform: capitalize;
+}
+
 table {
   text-align: left;
 }

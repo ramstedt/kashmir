@@ -6,7 +6,7 @@ import AllergyLegend from "../components/consumerView/menu/allergyLegend/Allergy
 
 export const getStaticProps = async () => {
   const { data: menuitems } = await supabase
-    .from("menuitems")
+    .from("menuitem")
     .select("*")
     .eq("is_available", "true")
     .gte("stock", 1);
@@ -26,6 +26,7 @@ export default function Menu({ menuitems }) {
         {menuitems?.map((product) => (
           <MenuItemCard
             key={product.id}
+            productId={product.id}
             title={product.name}
             price={product.price}
             description={product.description}

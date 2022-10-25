@@ -3,6 +3,7 @@ import CartProvider from "../context/Cart";
 import { useState, useEffect } from "react";
 import Auth from "../components/auth/Auth";
 import { supabase } from "../utils/supabase";
+import User from "../components/user/User";
 
 function MyApp({ Component, pageProps }) {
   const [session, setSession] = useState(null);
@@ -43,6 +44,7 @@ function MyApp({ Component, pageProps }) {
         <Auth />
       ) : (
         <CartProvider>
+          <User session={session} />
           <Component {...pageProps} />
         </CartProvider>
       )}

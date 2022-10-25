@@ -1,7 +1,38 @@
 import Image from "next/image";
 import Logo from "../../../public/images/logo.png";
 import Popup from "reactjs-popup";
-import { useState } from "react";
+import { supabase } from "../../../utils/supabase";
+
+async function addToSupaCart(prodId) {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  const { user } = session;
+  console.log(user.id);
+
+  // check if item already exists in cart
+  const { data: cartitems } = await supabase
+    .from("cart")
+    .select("*")
+    .eq("user_id", user.id)
+    .eq("menuitem_id", prodId);
+
+  if (!cartitems[0] || 0) {
+    //add item to cart
+    const { data, error } = await supabase
+      .from("cart")
+      .insert([{ menuitem_id: prodId, quantity: 1, user_id: user.id }], {
+        upsert: true,
+      });
+  } else {
+    //update item quantity
+    const { data, error } = await supabase
+      .from("cart")
+      .update({ quantity: cartitems[0].quantity + 1 })
+      .eq("user_id", user.id)
+      .eq("menuitem_id", prodId);
+  }
+}
 
 export default function FoodItemCard({
   title,
@@ -12,19 +43,8 @@ export default function FoodItemCard({
   glutenFree,
   nuts,
   addToCart,
+  productId,
 }) {
-  // let [count, setCount] = useState(1);
-  // function incrementCount() {
-  //   count = count + 1;
-  //   setCount(count);
-  // }
-  // function decrementCount() {
-  //   count = count - 1;
-  //   if (count <= 0) {
-  //     count = 0;
-  //   }
-  //   setCount(count);
-  // }
   return (
     <div suppressHydrationWarning={true}>
       <Popup
@@ -35,7 +55,7 @@ export default function FoodItemCard({
                 <Image src={Logo} width="100px" height="100px" />
               </div>
               <div>
-                <h2>{title}</h2>
+                <h2 className="menuItem">{title}</h2>
                 <h5>
                   {vegan} {vegetarian} {nuts} {glutenFree}
                 </h5>
@@ -58,10 +78,10 @@ export default function FoodItemCard({
                   <Image src={Logo} />
                 </div>
                 <div className="flex items-end justify-between">
-                  <h6>{title}</h6>
+                  <h6 className="menuItem">{title}</h6>
                   <h3>{price} kr</h3>
                 </div>
-                <div>{description}</div>
+                <div className="menuItem">{description}</div>
                 <div className="text-pumpkin my-3">
                   {vegan} {vegetarian} {nuts} {glutenFree}
                 </div>
@@ -72,12 +92,14 @@ export default function FoodItemCard({
                   >
                     Add to order
                   </button>
+                  <button
+                    onClick={() => addToSupaCart(productId)}
+                    className="bg-spaceCadet text-white border-solid border-2 border-spaceCadet px-2 py-2 rounded-2xl"
+                  >
+                    Supacart
+                  </button>
                 </div>
-                <div className="mt-5">
-                  {/* <button onClick={decrementCount}>-</button>
-                  <div>{count}</div>
-                  <button onClick={incrementCount}>+</button> */}
-                </div>
+                <div className="mt-5"></div>
               </div>
             </div>
           </div>

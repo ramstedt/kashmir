@@ -29,43 +29,38 @@ export default function Checkout() {
 
   return (
     <>
-      {!session ? (
-        <Auth />
-      ) : (
-        <>
-          <h1>checkout</h1>
-          <p>you are signed in as</p>
-          {console.log(cart)}
-          <User session={session} />
-          {cart.length > 0 ? (
-            <>
-              <CartInfo />
-              <form action="/api/checkout_sessions" method="POST">
-                {cart.map((item) => {
-                  return (
-                    <input
-                      type="hidden"
-                      key={item.id}
-                      name={item.id}
-                      value={item.id}
-                    />
-                  );
-                })}
-                <section>
-                  <button type="submit" role="link">
-                    Checkout
-                  </button>
-                </section>
-              </form>
-            </>
-          ) : (
-            <p>
-              Your order is currently empty. Please browse the menu and add
-              something to your order.
-            </p>
-          )}
-        </>
-      )}
+      <>
+        <h1>checkout</h1>
+        {console.log(cart)}
+
+        {cart.length > 0 ? (
+          <>
+            <CartInfo />
+            <form action="/api/checkout_sessions" method="POST">
+              {cart.map((item) => {
+                return (
+                  <input
+                    type="hidden"
+                    key={item.id}
+                    name={item.id}
+                    value={item.id}
+                  />
+                );
+              })}
+              <section>
+                <button type="submit" role="link">
+                  Checkout
+                </button>
+              </section>
+            </form>
+          </>
+        ) : (
+          <p>
+            Your order is currently empty. Please browse the menu and add
+            something to your order.
+          </p>
+        )}
+      </>
     </>
   );
 }
