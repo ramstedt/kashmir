@@ -1,58 +1,34 @@
-import User from "../components/user/User";
 import CartInfo from "../components/consumerView/cart/CartInfo";
 import useCart from "../hooks/useCart";
-import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { supabase } from "../utils/supabase";
-import Auth from "../components/auth/Auth";
-import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-);
-
-export default function Checkout() {
+export default function Checkout({ session }) {
   const { cart, total } = useCart();
 
-  useEffect(() => {
-    // Check to see if this is a redirect back from Checkout
-    const query = new URLSearchParams(window.location.search);
-    if (query.get("success")) {
-      console.log("Order placed! You will receive an email confirmation.");
-    }
-
-    if (query.get("canceled")) {
-      console.log(
-        "Order canceled -- continue to shop around and checkout when you're ready."
-      );
-    }
-  }, []);
+  const handleCheckout = async () => {
+    axios.post("api/checkout_sessions", {
+      user_id: session.user.id,
+      user_email: session.user.email,
+    });
+  };
 
   return (
     <>
       <>
         <h1>checkout</h1>
-        {console.log(cart)}
+        {/* {console.log(cart)} */}
 
         {cart.length > 0 ? (
           <>
             <CartInfo />
             <form action="/api/checkout_sessions" method="POST">
-              {cart.map((item) => {
-                return (
-                  <input
-                    type="hidden"
-                    key={item.id}
-                    name={item.id}
-                    value={item.id}
-                  />
-                );
-              })}
               <section>
-                <button type="submit" role="link">
-                  Checkout
-                </button>
+                <button type="submit">Checkout</button>
               </section>
             </form>
+            <button onClick={handleCheckout}>TEST</button>
           </>
         ) : (
           <p>

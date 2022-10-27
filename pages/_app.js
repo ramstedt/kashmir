@@ -37,7 +37,6 @@ function MyApp({ Component, pageProps }) {
     };
   }, []);
 
-  console.log(session);
   return (
     <>
       {!session ? (
@@ -45,7 +44,7 @@ function MyApp({ Component, pageProps }) {
       ) : (
         <CartProvider>
           <User session={session} />
-          <Component {...pageProps} />
+          <Component {...pageProps} session={session} />
         </CartProvider>
       )}
     </>

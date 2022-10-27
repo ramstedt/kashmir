@@ -3,33 +3,30 @@ import Logo from "../../../public/images/logo.png";
 import Popup from "reactjs-popup";
 import { supabase } from "../../../utils/supabase";
 
-async function addToSupaCart(prodId) {
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-  const { user } = session;
-  console.log(user.id);
-
+async function addToSupaCart(prodId, session) {
   // check if item already exists in cart
   const { data: cartitems } = await supabase
     .from("cart")
     .select("*")
-    .eq("user_id", user.id)
+    .eq("user_id", session.user.id)
     .eq("menuitem_id", prodId);
 
   if (!cartitems[0] || 0) {
     //add item to cart
     const { data, error } = await supabase
       .from("cart")
-      .insert([{ menuitem_id: prodId, quantity: 1, user_id: user.id }], {
-        upsert: true,
-      });
+      .insert(
+        [{ menuitem_id: prodId, quantity: 1, user_id: session.user.id }],
+        {
+          upsert: true,
+        }
+      );
   } else {
     //update item quantity
     const { data, error } = await supabase
       .from("cart")
       .update({ quantity: cartitems[0].quantity + 1 })
-      .eq("user_id", user.id)
+      .eq("user_id", session.user.id)
       .eq("menuitem_id", prodId);
   }
 }
@@ -44,6 +41,7 @@ export default function FoodItemCard({
   nuts,
   addToCart,
   productId,
+  session,
 }) {
   return (
     <div suppressHydrationWarning={true}>
@@ -93,7 +91,7 @@ export default function FoodItemCard({
                     Add to order
                   </button>
                   <button
-                    onClick={() => addToSupaCart(productId)}
+                    onClick={() => addToSupaCart(productId, session)}
                     className="bg-spaceCadet text-white border-solid border-2 border-spaceCadet px-2 py-2 rounded-2xl"
                   >
                     Supacart

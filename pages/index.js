@@ -4,12 +4,13 @@ import { supabase } from "../utils/supabase";
 import useCart from "../hooks/useCart";
 import AllergyLegend from "../components/consumerView/menu/allergyLegend/AllergyLegend";
 
-export const getStaticProps = async () => {
+export const getStaticProps = async (session) => {
   const { data: menuitems } = await supabase
     .from("menuitem")
     .select("*")
     .eq("is_available", "true")
     .gte("stock", 1);
+
   return {
     props: {
       menuitems,
@@ -17,7 +18,7 @@ export const getStaticProps = async () => {
   };
 };
 
-export default function Menu({ menuitems }) {
+export default function Menu({ menuitems, session }) {
   const { cart, addItemToCart } = useCart();
   return (
     <>
@@ -35,6 +36,7 @@ export default function Menu({ menuitems }) {
             nuts={product.contains_nuts ? "contains nuts" : ""}
             glutenFree={product.is_gluten_free ? "gluten free" : ""}
             addToCart={() => addItemToCart(product)}
+            session={session}
           />
         ))}
       </MenuWrapper>
