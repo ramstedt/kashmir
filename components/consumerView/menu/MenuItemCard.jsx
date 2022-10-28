@@ -39,10 +39,10 @@ export default function FoodItemCard({
   vegetarian,
   glutenFree,
   nuts,
-  addToCart,
   productId,
   session,
 }) {
+  console.log(session.user.id);
   return (
     <div suppressHydrationWarning={true}>
       <Popup
@@ -85,16 +85,10 @@ export default function FoodItemCard({
                 </div>
                 <div className="flex justify-start mt-10">
                   <button
-                    onClick={addToCart}
-                    className="bg-spaceCadet text-white border-solid border-2 border-spaceCadet px-2 py-2 rounded-2xl"
-                  >
-                    Add to order
-                  </button>
-                  <button
                     onClick={() => addToSupaCart(productId, session)}
                     className="bg-spaceCadet text-white border-solid border-2 border-spaceCadet px-2 py-2 rounded-2xl"
                   >
-                    Supacart
+                    Add to order
                   </button>
                 </div>
                 <div className="mt-5"></div>

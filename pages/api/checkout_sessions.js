@@ -1,8 +1,15 @@
 import { supabaseServerClient } from "../../utils/supabaseServerClient";
+import NextCors from "nextjs-cors";
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
+  await NextCors(req, res, {
+    // Options
+    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+    origin: "*",
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  });
   if (req.method === "POST") {
     //fetch the users email and ID
     const { user_email, user_id } = req.body;

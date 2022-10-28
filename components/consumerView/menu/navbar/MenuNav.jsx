@@ -2,21 +2,25 @@ import Popup from "reactjs-popup";
 import { useRef } from "react";
 import MenuButton from "./MenuButton";
 import Link from "next/link";
-import AllergyLegend from "../menu/allergyLegend/AllergyLegend";
-import CartInfo from "../../cart/CartInfo";
+import useCart from "../../../../hooks/useCart";
+import { TbSeedingOff, TbEgg } from "react-icons/tb";
+import { RiLeafFill } from "react-icons/ri";
+import { GiPeanut } from "react-icons/gi";
+import AllergyLegend from "../allergyLegend/AllergyLegend";
+import SupaCart from "../../cart/CartInfo";
 
-export default function MenuNav() {
+export default function MenuNav({ session }) {
   const ref = useRef();
   const closeMenu = () => ref.current.close();
-
   return (
-    <nav className="fixed bottom-0 z-[999] w-full bg-spaceCadet text-white font-MulishBold h-14 rounded-t-md">
+    // <nav className="fixed bottom-0 z-[999] w-full bg-spaceCadet text-white font-MulishBold h-14 rounded-t-md">
+    <nav className="absolute bottom-0 w-full bg-spaceCadet text-white font-MulishBold h-14 rounded-t-md">
       <ul className="flex h-full justify-around items-center content-center text-center">
         <li className="w-[50%] h-full flex items-center justify-center">
           <Popup
             trigger={
               <div className="menu-item w-[50%] flex h-full items-center justify-center text-center">
-                Menu
+                <button className="h-full w-full">Menu</button>
               </div>
             }
             position="top"
@@ -60,7 +64,7 @@ export default function MenuNav() {
           <Popup
             trigger={
               <div className="menu-item w-[50%] flex h-full items-center justify-center text-center">
-                Your order
+                <button className="h-full w-full">Your order</button>
               </div>
             }
             position="top"
@@ -75,12 +79,10 @@ export default function MenuNav() {
               </div>
               <div>
                 <h2>Your order</h2>
+                <SupaCart session={session} />
               </div>
               <div>
-                <div className="flex flex-col gap-5">
-                  <CartInfo />
-                </div>
-                <div>Total: {total}</div>
+                <div className="flex flex-col gap-5"></div>
                 <Link href="/checkout">
                   <button>Place order</button>
                 </Link>

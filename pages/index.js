@@ -1,8 +1,8 @@
-import MenuWrapper from "../components/consumerView/menu/MenuWrapper";
 import MenuItemCard from "../components/consumerView/menu/MenuItemCard";
 import { supabase } from "../utils/supabase";
 import useCart from "../hooks/useCart";
 import AllergyLegend from "../components/consumerView/menu/allergyLegend/AllergyLegend";
+import MenuNav from "../components/consumerView/menu/navbar/MenuNav";
 
 export const getStaticProps = async (session) => {
   const { data: menuitems } = await supabase
@@ -19,10 +19,10 @@ export const getStaticProps = async (session) => {
 };
 
 export default function Menu({ menuitems, session }) {
-  const { cart, addItemToCart } = useCart();
+  console.log(session);
   return (
     <>
-      <MenuWrapper>
+      <div className="max-w-lg flex flex-col m-auto">
         <h1>Kashmir</h1>
         {menuitems?.map((product) => (
           <MenuItemCard
@@ -39,8 +39,9 @@ export default function Menu({ menuitems, session }) {
             session={session}
           />
         ))}
-      </MenuWrapper>
-      <AllergyLegend />
+        <AllergyLegend />
+      </div>
+      <MenuNav />
     </>
   );
 }

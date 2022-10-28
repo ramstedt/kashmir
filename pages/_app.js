@@ -42,10 +42,10 @@ function MyApp({ Component, pageProps }) {
       {!session ? (
         <Auth />
       ) : (
-        <CartProvider>
+        <>
           <User session={session} />
           <Component {...pageProps} session={session} />
-        </CartProvider>
+        </>
       )}
     </>
   );
