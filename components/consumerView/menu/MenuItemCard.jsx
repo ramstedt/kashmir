@@ -42,7 +42,6 @@ export default function FoodItemCard({
   productId,
   session,
 }) {
-  console.log(session.user.id);
   return (
     <div suppressHydrationWarning={true}>
       <Popup

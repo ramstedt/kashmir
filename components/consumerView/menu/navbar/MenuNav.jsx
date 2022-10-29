@@ -3,7 +3,7 @@ import { useRef } from "react";
 import MenuButton from "./MenuButton";
 import Link from "next/link";
 import AllergyLegend from "../allergyLegend/AllergyLegend";
-import SupaCart from "../../cart/CartInfo";
+import Cart from "../../cart/Cart";
 
 export default function MenuNav({ session }) {
   const ref = useRef();
@@ -75,13 +75,7 @@ export default function MenuNav({ session }) {
               </div>
               <div>
                 <h2>Your order</h2>
-                <SupaCart session={session} />
-              </div>
-              <div>
-                <div className="flex flex-col gap-5"></div>
-                <Link href="/checkout">
-                  <button>Place order</button>
-                </Link>
+                <Cart session={session} />
               </div>
               <AllergyLegend />
             </div>

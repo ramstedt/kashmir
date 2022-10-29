@@ -1,5 +1,4 @@
 import "../styles/globals.css";
-import CartProvider from "../context/Cart";
 import { useState, useEffect } from "react";
 import Auth from "../components/auth/Auth";
 import { supabase } from "../utils/supabase";

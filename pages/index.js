@@ -40,7 +40,7 @@ export default function Menu({ menuitems, session }) {
         ))}
         <AllergyLegend />
       </div>
-      <MenuNav />
+      <MenuNav session={session} />
     </>
   );
 }

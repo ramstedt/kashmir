@@ -9,7 +9,7 @@ export default function Checkout({ session }) {
         <>
           <CartInfo />
           <form action="/api/checkout_sessions" method="POST">
-            {/* if the user manipulates the user ID then the POST will fail. The
+            {/* if the user manipulates the user ID then the POST will fail because of RLS rules. The
             email is only passed to pre-fill the stripe checkout email field. */}
             <input
               type="hidden"
