@@ -1,28 +1,6 @@
 import CartInfo from "../components/consumerView/cart/CartInfo";
-import { useRouter } from "next/router";
-import { supabase } from "../utils/supabase";
-import axios from "axios";
 
 export default function Checkout({ session }) {
-  const handleCheckout = async () => {
-    const config = {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    };
-    const url = "api/checkout_sessions";
-
-    const data = {
-      user_id: session.user.id,
-      user_email: session.user.email,
-    };
-
-    axios
-      .post(url, data, config)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  };
-
   return (
     <>
       <>
@@ -31,11 +9,24 @@ export default function Checkout({ session }) {
         <>
           <CartInfo />
           <form action="/api/checkout_sessions" method="POST">
+            {/* if the user manipulates the user ID then the POST will fail. The
+            email is only passed to pre-fill the stripe checkout email field. */}
+            <input
+              type="hidden"
+              id="user_email"
+              name="user_email"
+              value={session.user.email}
+            />
+            <input
+              type="hidden"
+              id="user_id"
+              name="user_id"
+              value={session.user.id}
+            />
             <section>
               <button type="submit">Checkout</button>
             </section>
           </form>
-          <button onClick={handleCheckout}>TEST</button>
         </>
       </>
     </>

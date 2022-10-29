@@ -40,3 +40,4 @@ next-env.d.ts
 pages/test.js
 pages/user.js
 notes.js
+pages/api/test.js

@@ -1,10 +1,9 @@
 import MenuItemCard from "../components/consumerView/menu/MenuItemCard";
 import { supabase } from "../utils/supabase";
-import useCart from "../hooks/useCart";
 import AllergyLegend from "../components/consumerView/menu/allergyLegend/AllergyLegend";
 import MenuNav from "../components/consumerView/menu/navbar/MenuNav";
 
-export const getStaticProps = async (session) => {
+export const getServerSideProps = async () => {
   const { data: menuitems } = await supabase
     .from("menuitem")
     .select("*")
@@ -24,9 +23,9 @@ export default function Menu({ menuitems, session }) {
     <>
       <div className="max-w-lg flex flex-col m-auto">
         <h1>Kashmir</h1>
-        {menuitems?.map((product) => (
+        {menuitems?.map((product, key) => (
           <MenuItemCard
-            key={product.id}
+            key={key}
             productId={product.id}
             title={product.name}
             price={product.price}

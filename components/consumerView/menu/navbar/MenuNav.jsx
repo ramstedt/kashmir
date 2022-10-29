@@ -2,10 +2,6 @@ import Popup from "reactjs-popup";
 import { useRef } from "react";
 import MenuButton from "./MenuButton";
 import Link from "next/link";
-import useCart from "../../../../hooks/useCart";
-import { TbSeedingOff, TbEgg } from "react-icons/tb";
-import { RiLeafFill } from "react-icons/ri";
-import { GiPeanut } from "react-icons/gi";
 import AllergyLegend from "../allergyLegend/AllergyLegend";
 import SupaCart from "../../cart/CartInfo";
 

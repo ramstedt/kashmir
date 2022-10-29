@@ -1,15 +1,8 @@
 import { supabaseServerClient } from "../../utils/supabaseServerClient";
-import NextCors from "nextjs-cors";
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
-  await NextCors(req, res, {
-    // Options
-    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-    origin: "*",
-    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-  });
   if (req.method === "POST") {
     //fetch the users email and ID
     const { user_email, user_id } = req.body;
@@ -32,6 +25,7 @@ export default async function handler(req, res) {
       });
     }
 
+    //create an order
     const { data: order, error: orderCreationError } =
       await supabaseServerClient
         .from("order")
@@ -57,6 +51,7 @@ export default async function handler(req, res) {
       user_id: user_id,
     }));
 
+    //insert cart items as order items with the new order id
     const { data: order_items, error: orderItemsInsertionError } =
       await supabaseServerClient
         .from("orderitem")
@@ -81,12 +76,12 @@ export default async function handler(req, res) {
     }));
 
     try {
-      // Create Checkout Sessions from body params.
+      // Create Checkout Sessions
       const session = await stripe.checkout.sessions.create({
         customer_email: user_email,
         line_items,
         mode: "payment",
-        payment_method_types: ["card"],
+        payment_method_types: ["klarna", "card"],
         success_url: `${req.headers.origin}/success`,
         cancel_url: `${req.headers.origin}/canceled`,
         payment_intent_data: {
