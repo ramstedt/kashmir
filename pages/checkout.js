@@ -1,4 +1,4 @@
-import CartInfo from "../components/consumerView/cart/CartInfo";
+import CartInfo from "../components/consumerView/cart/Cart";
 
 export default function Checkout({ session }) {
   return (
