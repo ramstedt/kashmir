@@ -2,6 +2,7 @@ import MenuItemCard from "../components/consumerView/menu/MenuItemCard";
 import { supabase } from "../utils/supabase";
 import AllergyLegend from "../components/consumerView/menu/allergyLegend/AllergyLegend";
 import MenuNav from "../components/consumerView/menu/navbar/MenuNav";
+import Logo from "../public/images/logo.png";
 
 export const getServerSideProps = async () => {
   const { data: menuitems } = await supabase
@@ -30,6 +31,7 @@ export default function Menu({ menuitems, session }) {
             title={product.name}
             price={product.price}
             description={product.description}
+            image={product.image}
             vegan={product.is_vegan ? "vegan" : ""}
             vegetarian={product.is_vegetarian ? "vegetarian" : ""}
             nuts={product.contains_nuts ? "contains nuts" : ""}

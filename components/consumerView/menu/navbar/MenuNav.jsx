@@ -73,11 +73,8 @@ export default function MenuNav({ session }) {
               <div className="fixed p-2 top-0 right-0" onClick={closeMenu}>
                 <span className="m-2 text-xl">X</span>
               </div>
-              <div>
-                <h2>Your order</h2>
-                <Cart session={session} />
-              </div>
-              <AllergyLegend />
+
+              <Cart session={session} />
             </div>
           </Popup>
         </li>

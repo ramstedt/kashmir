@@ -4,7 +4,7 @@ import { GiPeanut } from "react-icons/gi";
 
 export default function AllergyLegend() {
   return (
-    <div className=" grid grid-cols-2 w-fit self-center">
+    <div className=" grid grid-cols-2 w-fit self-center text-sm ">
       <div className="flex items-center">
         <TbSeedingOff /> = gluten free
       </div>

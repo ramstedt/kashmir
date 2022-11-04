@@ -6,6 +6,7 @@ import User from "../components/user/User";
 
 function MyApp({ Component, pageProps }) {
   const [session, setSession] = useState(null);
+  const [admin, setIsAdmin] = useState(null);
   const [loading, setLoading] = useState(false);
   //check if logged in
   useEffect(() => {
@@ -18,6 +19,16 @@ function MyApp({ Component, pageProps }) {
       if (mounted) {
         if (session) {
           setSession(session);
+          const { data: admin } = await supabase
+            .from("admin")
+            .select("*")
+            .limit(1)
+            .eq("user_id", session.user.id);
+          if (admin[0].is_admin) {
+            setIsAdmin(true);
+          } else {
+            setIsAdmin(false);
+          }
         }
       }
       setLoading(false);
@@ -35,7 +46,7 @@ function MyApp({ Component, pageProps }) {
       subscription?.unsubscribe();
     };
   }, []);
-
+  console.log(admin);
   return (
     <>
       {!session ? (
@@ -43,7 +54,7 @@ function MyApp({ Component, pageProps }) {
       ) : (
         <>
           <User session={session} />
-          <Component {...pageProps} session={session} />
+          <Component {...pageProps} session={session} admin={admin} />
         </>
       )}
     </>

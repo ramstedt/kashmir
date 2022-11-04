@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Logo from "../../../public/images/logo.png";
 import Popup from "reactjs-popup";
 import { supabase } from "../../../utils/supabase";
 
@@ -41,6 +40,7 @@ export default function FoodItemCard({
   nuts,
   productId,
   session,
+  image,
 }) {
   return (
     <div suppressHydrationWarning={true}>
@@ -49,7 +49,12 @@ export default function FoodItemCard({
           <div className="w-full h-[120px] bg-white rounded-xl shadow-lg mb-4 cursor-pointer">
             <div className="flex w-full h-full p-2.5">
               <div className="">
-                <Image src={Logo} width="100px" height="100px" />
+                <Image
+                  src={image}
+                  width="100px"
+                  height="100px"
+                  alt={`a photo of ${title}`}
+                />
               </div>
               <div>
                 <h2 className="menuItem">{title}</h2>
@@ -72,7 +77,12 @@ export default function FoodItemCard({
               </button>
               <div className="max-w-[800px] m-auto">
                 <div className="w-full h-[400px]">
-                  <Image src={Logo} />
+                  <Image
+                    src={image}
+                    width="100px"
+                    height="100px"
+                    alt={`a photo of ${title}`}
+                  />
                 </div>
                 <div className="flex items-end justify-between">
                   <h6 className="menuItem">{title}</h6>

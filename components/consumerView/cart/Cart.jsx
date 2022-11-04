@@ -3,6 +3,8 @@ import { useState, useEffect, useReducer } from "react";
 import { TbEgg, TbSeedingOff } from "react-icons/tb";
 import { RiLeafFill } from "react-icons/ri";
 import { GiPeanut } from "react-icons/gi";
+import Button from "../../button/Button";
+import AllergyLegend from "../menu/allergyLegend/AllergyLegend";
 
 export default function Cart({ session }) {
   const [cart, setCart] = useState([]);
@@ -77,7 +79,7 @@ export default function Cart({ session }) {
   };
 
   return (
-    <>
+    <div className="max-w-xl m-auto">
       {cart?.map((item, key) => {
         return (
           <div key={key}>
@@ -105,10 +107,13 @@ export default function Cart({ session }) {
           </div>
         );
       })}
-      {cart?.map((item) => {
-        total = total + item.menuitem.price * item.quantity;
-      })}
-      TOTAL: {total} kr
+      <div className="flex flex-col items-center">
+        <AllergyLegend />
+        {cart?.map((item) => {
+          total = total + item.menuitem.price * item.quantity;
+        })}
+        <div className="my-4 font-MulishBold">TOTAL: {total} kr</div>
+      </div>
       <form action="/api/checkout_sessions" method="POST">
         {/* if the user manipulates the user ID then the POST will fail. The
             email is only passed to pre-fill the stripe checkout email field. */}
@@ -124,10 +129,9 @@ export default function Cart({ session }) {
           name="user_id"
           value={session.user.id}
         />
-        <section>
-          <button type="submit">Checkout</button>
-        </section>
+
+        <Button type="submit" text="Place order" />
       </form>
-    </>
+    </div>
   );
 }
