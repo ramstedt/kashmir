@@ -50,7 +50,10 @@ export default function MenuNav({ session }) {
                   </button>
                 </div>
               </form>
-              <div className="fixed p-2 top-0 right-0" onClick={closeMenu}>
+              <div
+                className="fixed p-2 top-0 right-0 cursor-pointer"
+                onClick={closeMenu}
+              >
                 <span className="m-2 text-xl">X</span>
               </div>
             </div>

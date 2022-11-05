@@ -48,11 +48,11 @@ export default function FoodItemCard({
         trigger={
           <div className="w-full h-[120px] bg-white rounded-xl shadow-lg mb-4 cursor-pointer">
             <div className="flex w-full h-full p-2.5">
-              <div className="">
+              <div className="mr-1 relative w-[100px] h-[100px]">
                 <Image
                   src={image}
-                  width="100px"
-                  height="100px"
+                  layout="fill"
+                  objectFit="cover"
                   alt={`a photo of ${title}`}
                 />
               </div>
@@ -72,15 +72,13 @@ export default function FoodItemCard({
         {(close) => (
           <div className="bg-cultured h-screen w-screen">
             <div className="mx-[6%]">
-              <button className="close" onClick={close}>
-                X
-              </button>
               <div className="max-w-[800px] m-auto">
-                <div className="w-full h-[400px]">
+                <div className="max-w-[800px] h-[400px] bg-black relative">
                   <Image
                     src={image}
-                    width="100px"
-                    height="100px"
+                    className="w-full"
+                    layout="fill"
+                    objectFit="cover"
                     alt={`a photo of ${title}`}
                   />
                 </div>
@@ -102,6 +100,12 @@ export default function FoodItemCard({
                 </div>
                 <div className="mt-5"></div>
               </div>
+            </div>
+            <div
+              className=" flex justify-center p-2 cursor-pointer"
+              onClick={close}
+            >
+              <button className="m-2 text-xl">X</button>
             </div>
           </div>
         )}
