@@ -1,5 +1,5 @@
-import AddNewCard from "../../components/adminView/addNew/AddNewCard";
+import AddNewForm from "../../components/adminView/addNew/AddNewForm";
 
 export default function AddNew({ admin }) {
-  return <>{!admin ? "" : <AddNewCard />}</>;
+  return <>{!admin ? "" : <AddNewForm />}</>;
 }

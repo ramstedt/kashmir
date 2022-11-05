@@ -100,7 +100,12 @@
 
   input {
     @apply border-solid;
-    @apply h-2;
+    @apply h-8;
+  }
+
+  input[type="checkbox"] {
+    @apply h-3;
+    @apply mr-2;
   }
 
   table,

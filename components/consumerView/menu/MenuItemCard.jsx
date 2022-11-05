@@ -2,7 +2,7 @@ import Image from "next/image";
 import Popup from "reactjs-popup";
 import { supabase } from "../../../utils/supabase";
 
-async function addToSupaCart(prodId, session) {
+async function addToCart(prodId, session) {
   // check if item already exists in cart
   const { data: cartitems } = await supabase
     .from("cart")
@@ -94,7 +94,7 @@ export default function FoodItemCard({
                 </div>
                 <div className="flex justify-start mt-10">
                   <button
-                    onClick={() => addToSupaCart(productId, session)}
+                    onClick={() => addToCart(productId, session)}
                     className="bg-spaceCadet text-white border-solid border-2 border-spaceCadet px-2 py-2 rounded-2xl"
                   >
                     Add to order

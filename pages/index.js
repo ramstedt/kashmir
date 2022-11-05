@@ -2,9 +2,8 @@ import MenuItemCard from "../components/consumerView/menu/MenuItemCard";
 import { supabase } from "../utils/supabase";
 import AllergyLegend from "../components/consumerView/menu/allergyLegend/AllergyLegend";
 import MenuNav from "../components/consumerView/menu/navbar/MenuNav";
-import Logo from "../public/images/logo.png";
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const { data: menuitems } = await supabase
     .from("menuitem")
     .select("*")
