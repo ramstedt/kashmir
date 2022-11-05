@@ -3,7 +3,7 @@ const nextConfig = {
   // reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["images.unsplash.com", process.env.NEXT_PUBLIC_SUPABASE_URL],
+    domains: ["images.unsplash.com", "stbeleantghideknntys.supabase.co"],
   },
 };
 

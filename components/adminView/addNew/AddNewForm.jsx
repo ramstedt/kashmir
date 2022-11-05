@@ -51,11 +51,48 @@ export default function AddNewForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data) => console.log(data);
+
+  const onSubmit = async (form) => {
+    const imageName = `${Date.now()}_${form.image[0].name}`;
+    const imageFile = form.image[0];
+    const { data: image, error: imageError } = await supabase.storage
+      .from("menuitems")
+      .upload(imageName, imageFile, {
+        cacheControl: "3600",
+        upsert: false,
+      });
+    if (imageError) return console.log(imageError);
+    const publicUrl = supabase.storage
+      .from("menuitems")
+      .getPublicUrl(imageName);
+
+    console.log(publicUrl.data.publicUrl);
+
+    const { data: menuitem, error: menuitemError } = await supabase
+      .from("menuitem")
+      .insert([
+        {
+          name: form.title,
+          description: form.description,
+          price: form.price,
+          stock: form.stock,
+          category_id: form.category,
+          image: publicUrl.data.publicUrl,
+          is_vegetarian: form.vegetarian,
+          is_vegan: form.vegan,
+          is_gluten_free: form.glutenFree,
+          contains_nuts: form.containsNuts,
+          is_available: form.available,
+        },
+      ]);
+    if (menuitemError) return console.log(menuitemError);
+    reset();
+  };
 
   return (
     <>
@@ -109,7 +146,16 @@ export default function AddNewForm() {
           <label htmlFor="image">Image:</label>
           <input type="file" {...register("image", { required: true })} />
           <p>{errors.image?.message}</p>
+          <label htmlFor="available">
+            <input
+              type="checkbox"
+              accept="image/*"
+              {...register("available")}
+            />
+            Available to order
+          </label>
           <button type="submit">Submit</button>
+          {isSubmitSuccessful && <p>Item submitted successfully</p>}
         </form>
       </div>
     </>
