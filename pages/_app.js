@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import { useState, useEffect } from "react";
 import Auth from "../components/auth/Auth";
 import { supabase } from "../utils/supabase";
-import User from "../components/user/User";
+import AdminNav from "../components/adminView/navbar/Navbar";
 
 function MyApp({ Component, pageProps }) {
   const [session, setSession] = useState(null);
@@ -46,14 +46,14 @@ function MyApp({ Component, pageProps }) {
       subscription?.unsubscribe();
     };
   }, []);
-  console.log(admin);
+
   return (
     <>
       {!session ? (
         <Auth />
       ) : (
         <>
-          <User session={session} />
+          {!admin ? "" : <AdminNav />}
           <Component {...pageProps} session={session} admin={admin} />
         </>
       )}

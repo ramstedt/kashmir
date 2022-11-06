@@ -129,7 +129,16 @@ export default function Cart({ session }) {
           name="user_id"
           value={session.user.id}
         />
-
+        <div className="flex flex-col items-center max-w-[600px]">
+          <div className="text-center flex flex-col min-w-full">
+            <label htmlfor="table">Your table number</label>
+            <input type="number" id="table" name="table" required />
+          </div>
+          <div className="mb-8 text-center flex flex-col min-w-full">
+            <label htmlfor="extra_info">Extra instructions (optional)</label>
+            <textarea id="extraInfo" name="extraInfo" rows="5" cols="10" />
+          </div>
+        </div>
         <Button type="submit" text="Place order" />
       </form>
     </div>

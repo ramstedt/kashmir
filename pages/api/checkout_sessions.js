@@ -5,7 +5,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 export default async function handler(req, res) {
   if (req.method === "POST") {
     //fetch the users email and ID
-    const { user_email, user_id } = req.body;
+    const { user_email, user_id, table, extraInfo } = req.body;
 
     if (!user_email || !user_id) {
       return res.status(400).json({
@@ -32,6 +32,8 @@ export default async function handler(req, res) {
         .insert([
           {
             user_id: user_id,
+            table: table,
+            extra_info: extraInfo,
           },
         ])
         .select();
