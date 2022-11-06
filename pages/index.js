@@ -2,6 +2,8 @@ import MenuItemCard from "../components/consumerView/menu/MenuItemCard";
 import { supabase } from "../utils/supabase";
 import AllergyLegend from "../components/consumerView/menu/allergyLegend/AllergyLegend";
 import MenuNav from "../components/consumerView/menu/navbar/MenuNav";
+import Logo from "../public/icons/kashmir-logo.svg";
+import Image from "next/image";
 
 export const getStaticProps = async () => {
   const { data: menuitems } = await supabase
@@ -22,7 +24,8 @@ export default function Menu({ menuitems, session }) {
   return (
     <>
       <div className="max-w-lg flex flex-col m-auto">
-        <h1>Kashmir</h1>
+        <Image src={Logo} alt="logo" height="500" />
+        <h1>Menu</h1>
         {menuitems?.map((product, key) => (
           <MenuItemCard
             key={key}
