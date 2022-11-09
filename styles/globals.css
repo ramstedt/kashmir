@@ -98,7 +98,8 @@
     @apply text-[20px];
   }
 
-  input {
+  input,
+  select {
     @apply border-solid;
     @apply h-8;
   }
@@ -113,9 +114,17 @@
     @apply border;
     @apply border-solid;
     @apply border-cobalt;
+    @apply border-x-0;
+    @apply text-cobalt;
   }
   tr:nth-child(even) {
-    @apply bg-red-200;
+    @apply bg-slate-200;
+  }
+
+  th,
+  td {
+    @apply py-4;
+    @apply px-5;
   }
 }
 
@@ -126,10 +135,6 @@ a {
 
 .menuItem::first-letter {
   text-transform: capitalize;
-}
-
-table {
-  text-align: left;
 }
 
 /* Position and sizing of burger button */

@@ -21,10 +21,10 @@ function MyApp({ Component, pageProps }) {
           setSession(session);
           const { data: admin } = await supabase
             .from("admin")
-            .select("*")
+            .select("is_admin")
             .limit(1)
             .eq("user_id", session.user.id);
-          if (admin[0].is_admin) {
+          if (admin) {
             setIsAdmin(true);
           } else {
             setIsAdmin(false);

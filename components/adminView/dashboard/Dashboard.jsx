@@ -1,11 +1,7 @@
 import { supabase } from "../../../utils/supabase";
 import { useState, useEffect } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
+import { BsFillCheckCircleFill } from "react-icons/bs";
+import Button from "../../button/Button";
 
 export default function DashboardCard() {
   const [orders, setOrders] = useState([]);
@@ -50,39 +46,36 @@ export default function DashboardCard() {
   }, []);
 
   return (
-    <>
-      <TableContainer>
-        <Table sx={{ maxWidth: 650 }} aria-label="table with orders">
-          <TableHead>
-            <TableRow>
-              <TableCell>Table number</TableCell>
-              <TableCell align="right">Items</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {orders.map((order, key) => (
-              <TableRow
-                key={key}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {order.table}
-                </TableCell>
-                <TableCell align="right">
-                  {order.orderitem.map((item, key) => (
-                    <div key={key}>
-                      {item.menuitem.name} {item.quantity}
-                    </div>
-                  ))}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  complete
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </>
+    <div className="mx-2 mt-3">
+      <h1>Active orders</h1>
+      <table className="w-full text-xl border-collapse my-2 min-w[400px]">
+        <thead>
+          <tr className="bg-spaceCadet text-white text-left ">
+            <th>Table</th>
+            <th>Order items</th>
+            <th>Complete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orders.map((order, key) => (
+            <tr key={key}>
+              <td>{order.table}</td>
+              <td>
+                {order.orderitem.map((item, key) => (
+                  <div key={key}>
+                    {item.quantity} of {item.menuitem.name}
+                  </div>
+                ))}
+              </td>
+              <td>
+                <button>
+                  <BsFillCheckCircleFill />
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }

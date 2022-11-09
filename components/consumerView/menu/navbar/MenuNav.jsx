@@ -10,7 +10,7 @@ export default function MenuNav({ session }) {
   const closeMenu = () => ref.current.close();
   return (
     // <nav className="fixed bottom-0 z-[999] w-full bg-spaceCadet text-white font-MulishBold h-14 rounded-t-md">
-    <nav className="absolute bottom-0 w-full bg-spaceCadet text-white font-MulishBold h-14 rounded-t-md">
+    <nav className=" w-full bg-spaceCadet text-white font-MulishBold h-14 rounded-t-md">
       <ul className="flex h-full justify-around items-center content-center text-center">
         <li className="w-[50%] h-full flex items-center justify-center">
           <Popup

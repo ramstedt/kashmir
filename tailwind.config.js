@@ -64,7 +64,7 @@ module.exports = {
         hover: "#162ADE",
       },
       boxShadow: {
-        foodItem:
+        shadow:
           "0px 0px 1px rgba(12, 26, 75, 0.03), 0px 4px 20px -2px rgba(50, 50, 71, 0.04);",
       },
     },
