@@ -1,8 +1,8 @@
 import { slide as Menu } from "react-burger-menu";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function AdminNav() {
-  // NOTE: You also need to provide styles, see https://github.com/negomi/react-burger-menu#styling
   return (
     <>
       <Menu right>

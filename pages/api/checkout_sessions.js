@@ -84,7 +84,7 @@ export default async function handler(req, res) {
         line_items,
         mode: "payment",
         payment_method_types: ["klarna", "card"],
-        success_url: `${req.headers.origin}/paymentsuccessful`,
+        success_url: `${req.headers.origin}/paymentsuccessful?session_id={CHECKOUT_SESSION_ID}&order_id=${order_id}`,
         cancel_url: `${req.headers.origin}/paymentcancelled`,
         payment_intent_data: {
           metadata: {

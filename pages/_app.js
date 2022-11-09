@@ -53,7 +53,6 @@ function MyApp({ Component, pageProps }) {
         <Auth />
       ) : (
         <>
-          {!admin ? "" : <AdminNav />}
           <Component {...pageProps} session={session} admin={admin} />
         </>
       )}

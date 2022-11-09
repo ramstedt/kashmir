@@ -5,7 +5,7 @@ import MenuNav from "../components/consumerView/menu/navbar/MenuNav";
 import Logo from "../public/icons/kashmir-logo.svg";
 import Image from "next/image";
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const { data: menuitems } = await supabase
     .from("menuitem")
     .select("*")
