@@ -102,6 +102,8 @@
   select {
     @apply border-solid;
     @apply h-8;
+    @apply rounded-lg;
+    @apply border-cobalt;
   }
 
   input[type="checkbox"] {

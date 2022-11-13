@@ -58,9 +58,9 @@ export default function FoodItemCard({
               </div>
               <div>
                 <h2 className="menuItem">{title}</h2>
-                <h5>
+                <div className="flex">
                   {vegan} {vegetarian} {nuts} {glutenFree}
-                </h5>
+                </div>
                 <h4>{price} kr</h4>
               </div>
             </div>
@@ -87,7 +87,7 @@ export default function FoodItemCard({
                   <h3>{price} kr</h3>
                 </div>
                 <div className="menuItem">{description}</div>
-                <div className="text-pumpkin my-3">
+                <div className="my-3 flex">
                   {vegan} {vegetarian} {nuts} {glutenFree}
                 </div>
                 <div className="flex justify-start mt-10">
