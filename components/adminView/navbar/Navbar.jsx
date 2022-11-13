@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function AdminNav() {
   return (
     <>
-      <Menu right>
+      <Menu>
         <div className="mb-4">Admin Navigation</div>
         <Link href="/admin/dashboard">Dashboard</Link>
         <Link href="/admin/addnew">Add new</Link>

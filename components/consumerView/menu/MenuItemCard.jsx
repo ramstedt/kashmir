@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Popup from "reactjs-popup";
 import { supabase } from "../../../utils/supabase";
+import { RiArrowGoBackFill } from "react-icons/ri";
 
 async function addToCart(prodId, session) {
   // check if item already exists in cart
@@ -54,9 +55,10 @@ export default function FoodItemCard({
                   layout="fill"
                   objectFit="cover"
                   alt={`a photo of ${title}`}
+                  className="rounded"
                 />
               </div>
-              <div>
+              <div className="ml-3 flex flex-col justify-center">
                 <h2 className="menuItem">{title}</h2>
                 <div className="flex">
                   {vegan} {vegetarian} {nuts} {glutenFree}
@@ -71,18 +73,18 @@ export default function FoodItemCard({
       >
         {(close) => (
           <div className="bg-cultured h-screen w-screen">
+            <div className="max-w-[800px] h-[300px] bg-black relative">
+              <Image
+                src={image}
+                className="w-full"
+                layout="fill"
+                objectFit="cover"
+                alt={`a photo of ${title}`}
+              />
+            </div>
             <div className="mx-[6%]">
               <div className="max-w-[800px] m-auto">
-                <div className="max-w-[800px] h-[400px] bg-black relative">
-                  <Image
-                    src={image}
-                    className="w-full"
-                    layout="fill"
-                    objectFit="cover"
-                    alt={`a photo of ${title}`}
-                  />
-                </div>
-                <div className="flex items-end justify-between">
+                <div className="flex items-end justify-between content-center">
                   <h6 className="menuItem">{title}</h6>
                   <h3>{price} kr</h3>
                 </div>
@@ -105,7 +107,9 @@ export default function FoodItemCard({
               className=" flex justify-center p-2 cursor-pointer"
               onClick={close}
             >
-              <button className="m-2 text-xl">X</button>
+              <button aria-label="go back">
+                <RiArrowGoBackFill />
+              </button>
             </div>
           </div>
         )}

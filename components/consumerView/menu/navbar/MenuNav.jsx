@@ -1,19 +1,78 @@
 import Popup from "reactjs-popup";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import MenuButton from "./MenuButton";
 import Cart from "../../cart/Cart";
+import { supabase } from "../../../../utils/supabase";
 
 export default function MenuNav({ session }) {
   const ref = useRef();
   const closeMenu = () => ref.current.close();
+  const [loading, setLoading] = useState(false);
+  const [cart, setCart] = useState("");
+  const [quantity, setQuantity] = useState("");
+
+  const fetchCartCount = async () => {
+    try {
+      setLoading(true);
+      let { data: cart, error } = await supabase
+        .from("cart")
+        .select("quantity")
+        .eq("user_id", session.user.id);
+
+      if (cart) {
+        setCart(cart);
+        let qty = cart.reduce((accumulator, object) => {
+          return accumulator + object.quantity;
+        }, 0);
+        setQuantity(qty);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const setupCartCount = async () => {
+    const cartcounter = supabase
+      .channel("custom-all-channel")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "cart",
+        },
+        () => {
+          fetchCartCount();
+          console.log("change detected");
+        }
+      )
+      .subscribe();
+  };
+
+  useEffect(() => {
+    fetchCartCount();
+    setupCartCount();
+  }, []);
+  // let qty = cart.reduce((accumulator, object) => {
+  //   return accumulator + object.quantity;
+  // }, 0);
+  // setQuantity(qty);
+  console.log(cart);
+  // cart.map((qty) => {
+  //   console.log(qty);
+  // });
   return (
-    <nav className="sticky bottom-0 w-full bg-spaceCadet text-white font-MulishBold h-14 rounded-t-md">
+    <nav className="sticky bottom-0 w-full bg-cobalt text-white font-MulishBold h-14 rounded-t-md">
       <ul className="flex h-full justify-around items-center content-center text-center">
-        <li className="w-[50%] h-full flex items-center justify-center">
-          <Popup
+        {/* <li className="w-[50%] h-full flex items-center justify-center">
+           <Popup
             trigger={
               <div className="menu-item w-[50%] flex h-full items-center justify-center text-center">
-                <button className="h-full w-full">Menu</button>
+                <button className="h-full w-full hover:bg-spaceCadet">
+                  Menu
+                </button>
               </div>
             }
             position="top"
@@ -42,7 +101,7 @@ export default function MenuNav({ session }) {
                   <MenuButton text="No nuts" value="noNuts"></MenuButton>
                 </div>
                 <div className="flex justify-center">
-                  <button className="border-solid border-2 border-spaceCadet text-white px-2 py-2 mx-1 rounded-2xl w-fit bg-spaceCadet">
+                  <button className="border-solid border-2 border-cobalt hover:bg-spaceCadet text-white px-2 py-2 mx-1 rounded-2xl w-fit">
                     Sort
                   </button>
                 </div>
@@ -54,13 +113,15 @@ export default function MenuNav({ session }) {
                 <span className="m-2 text-xl">X</span>
               </div>
             </div>
-          </Popup>
-        </li>
-        <li className="w-[50%] h-full flex items-center justify-center">
+          </Popup> 
+          </li> */}
+        <li className="w-full h-full flex items-center justify-center">
           <Popup
             trigger={
               <div className="menu-item w-[50%] flex h-full items-center justify-center text-center">
-                <button className="h-full w-full">Your order</button>
+                <button className="h-full w-full">
+                  Your order ({quantity})
+                </button>
               </div>
             }
             position="top"

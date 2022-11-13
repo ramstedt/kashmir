@@ -19,7 +19,8 @@ export default function Cart({ session }) {
         .select(
           `quantity, menuitem(id, name, description, price, is_gluten_free, is_vegan, is_vegetarian, contains_nuts)`
         )
-        .order("created_at");
+        .order("created_at")
+        .eq("user_id", session.user.id);
       if (cart) {
         setCart(cart);
       }
