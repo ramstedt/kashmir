@@ -25,7 +25,9 @@ export default function Menu({ menuitems, session }) {
   return (
     <>
       <div className="max-w-lg flex flex-col m-auto">
-        <Image src={Logo} alt="logo" height="500" />
+        <div className="my-2">
+          <Image src={Logo} alt="logo" height="500" />
+        </div>
         <h1 className="text-center my-4">Menu</h1>
         <AllergyLegend />
         <div className="mx-2">

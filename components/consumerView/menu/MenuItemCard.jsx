@@ -72,45 +72,53 @@ export default function FoodItemCard({
         nested
       >
         {(close) => (
-          <div className="bg-cultured h-screen w-screen">
-            <div className="max-w-[800px] h-[300px] bg-black relative">
-              <Image
-                src={image}
-                className="w-full"
-                layout="fill"
-                objectFit="cover"
-                alt={`a photo of ${title}`}
-              />
-            </div>
-            <div className="mx-[6%]">
-              <div className="max-w-[800px] m-auto">
-                <div className="flex items-end justify-between content-center">
-                  <h6 className="menuItem">{title}</h6>
-                  <h3>{price} kr</h3>
-                </div>
-                <div className="menuItem">{description}</div>
-                <div className="my-3 flex">
-                  {vegan} {vegetarian} {nuts} {glutenFree}
-                </div>
-                <div className="flex justify-start mt-10">
-                  <button
-                    onClick={() => addToCart(productId, session)}
-                    className="bg-spaceCadet text-white border-solid border-2 border-spaceCadet px-2 py-2 rounded-2xl"
-                  >
-                    Add to order
-                  </button>
-                </div>
-                <div className="mt-5"></div>
-              </div>
-            </div>
+          <div className="flex flex-col h-screen">
             <div
-              className=" flex justify-center p-2 cursor-pointer"
+              className="bg-black bg-opacity-70 relative top-0 h-[80px] w-screen flex justify-end items-start"
               onClick={close}
             >
               <button aria-label="go back">
-                <RiArrowGoBackFill />
+                <span className="text-white mr-2" onClick={close}>
+                  X
+                </span>
               </button>
             </div>
+            <div className="bg-cultured w-screen h-full">
+              <div className="max-w-[800px] h-[300px] relative left-[50%] transform translate-x-[-50%] mb-2">
+                <Image
+                  src={image}
+                  className="w-full"
+                  layout="fill"
+                  objectFit="cover"
+                  alt={`a photo of ${title}`}
+                />
+              </div>
+              <div className="mx-[6%]">
+                <div className="max-w-[800px] m-auto">
+                  <div className="flex items-end justify-between content-center">
+                    <h6 className="menuItem">{title}</h6>
+                    <h4 className="text-[18px]">{price} kr</h4>
+                  </div>
+                  <div className="menuItem">{description}</div>
+                  <div className="my-3 flex">
+                    {vegan} {vegetarian} {nuts} {glutenFree}
+                  </div>
+                  <div className="flex justify-start mt-10">
+                    <button
+                      onClick={() => addToCart(productId, session)}
+                      className="bg-spaceCadet text-white border-solid border-2 border-spaceCadet px-2 py-2 rounded-2xl"
+                    >
+                      Add to order
+                    </button>
+                  </div>
+                  <div className="mt-5"></div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="bg-black bg-opacity-50 relative top-0 h-[80px] w-screen"
+              onClick={close}
+            ></div>
           </div>
         )}
       </Popup>

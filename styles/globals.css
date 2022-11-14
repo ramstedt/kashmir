@@ -87,6 +87,7 @@
 
   h4 {
     @apply text-pumpkin;
+    @apply text-[16px];
   }
 
   h5 {
