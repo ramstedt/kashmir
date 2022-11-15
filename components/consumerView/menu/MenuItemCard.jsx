@@ -1,35 +1,9 @@
 import Image from "next/image";
 import Popup from "reactjs-popup";
 import { supabase } from "../../../utils/supabase";
-import { RiArrowGoBackFill } from "react-icons/ri";
-
-async function addToCart(prodId, session) {
-  // check if item already exists in cart
-  const { data: cartitems } = await supabase
-    .from("cart")
-    .select("*")
-    .eq("user_id", session.user.id)
-    .eq("menuitem_id", prodId);
-
-  if (!cartitems[0] || 0) {
-    //add item to cart
-    const { data, error } = await supabase
-      .from("cart")
-      .insert(
-        [{ menuitem_id: prodId, quantity: 1, user_id: session.user.id }],
-        {
-          upsert: true,
-        }
-      );
-  } else {
-    //update item quantity
-    const { data, error } = await supabase
-      .from("cart")
-      .update({ quantity: cartitems[0].quantity + 1 })
-      .eq("user_id", session.user.id)
-      .eq("menuitem_id", prodId);
-  }
-}
+import { useState } from "react";
+import Shoppingbasket from "../../../public/icons/shopping-basket.gif";
+import Spinner from "../../../public/icons/spinner.svg";
 
 export default function FoodItemCard({
   title,
@@ -43,6 +17,44 @@ export default function FoodItemCard({
   session,
   image,
 }) {
+  const [addConfirm, setAddConfirm] = useState(false);
+  const [loading, setLoading] = useState(false);
+  async function addToCart(prodId, session) {
+    setLoading(true);
+    // check if item already exists in cart
+    const { data: cartitems } = await supabase
+      .from("cart")
+      .select("*")
+      .eq("user_id", session.user.id)
+      .eq("menuitem_id", prodId);
+
+    if (!cartitems[0]) {
+      //add item to cart
+      const { data, error } = await supabase
+        .from("cart")
+        .insert(
+          [{ menuitem_id: prodId, quantity: 1, user_id: session.user.id }],
+          {
+            upsert: true,
+          }
+        );
+    } else {
+      //update item quantity
+      const { data, error } = await supabase
+        .from("cart")
+        .update({ quantity: cartitems[0].quantity + 1 })
+        .eq("user_id", session.user.id)
+        .eq("menuitem_id", prodId);
+    }
+    //fedback to user
+    setAddConfirm(true);
+    setLoading(false);
+    await delay(1500);
+    setAddConfirm(false);
+  }
+
+  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
   return (
     <div suppressHydrationWarning={true}>
       <Popup
@@ -106,12 +118,36 @@ export default function FoodItemCard({
                   <div className="flex justify-start mt-10">
                     <button
                       onClick={() => addToCart(productId, session)}
-                      className="bg-spaceCadet text-white border-solid border-2 border-spaceCadet px-2 py-2 rounded-2xl"
+                      className="bg-spaceCadet text-white border-solid border-2 border-spaceCadet px-2 py-2 rounded-2xl w-[150px]"
                     >
-                      Add to order
+                      {loading ? (
+                        <Image
+                          src={Spinner}
+                          alt="loading"
+                          height="19"
+                          width="19"
+                        />
+                      ) : !addConfirm ? (
+                        "Add to order"
+                      ) : (
+                        "Added"
+                      )}
                     </button>
+                    {!addConfirm ? (
+                      ""
+                    ) : (
+                      <div className="flex items-center bg-white w-fit rounded">
+                        <span className="text-center">
+                          <Image
+                            src={Shoppingbasket}
+                            alt="animated icon showing a shopping basket with food bouncing inside"
+                            width="40"
+                            height="40"
+                          />
+                        </span>
+                      </div>
+                    )}
                   </div>
-                  <div className="mt-5"></div>
                 </div>
               </div>
             </div>

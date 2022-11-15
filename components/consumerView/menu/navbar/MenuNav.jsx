@@ -34,6 +34,7 @@ export default function MenuNav({ session }) {
   };
 
   const setupCartCount = async () => {
+    console.log("hej");
     const cartcounter = supabase
       .channel("custom-all-channel")
       .on(
