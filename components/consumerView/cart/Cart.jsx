@@ -30,9 +30,6 @@ export default function Cart({ session }) {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    fetchCart();
-  }, []);
 
   const incrementQuantity = async (item) => {
     //update item quantity by 1
@@ -48,8 +45,6 @@ export default function Cart({ session }) {
         `quantity, menuitem(id, name, description, price, is_gluten_free, is_vegan, is_vegetarian, contains_nuts)`
       )
       .order("created_at");
-
-    setCart(cart);
   };
 
   const decrementQuantity = async (item) => {
@@ -75,10 +70,30 @@ export default function Cart({ session }) {
         `quantity, menuitem(id, name, description, price, is_gluten_free, is_vegan, is_vegetarian, contains_nuts)`
       )
       .order("created_at");
-
-    setCart(cart);
+  };
+  //listen to cart changes
+  const cartListener = async () => {
+    const cartcounter = supabase
+      .channel("custom-all-channel")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "cart",
+          filter: `user_id=eq.${session.user.id}`,
+        },
+        () => {
+          fetchCart();
+        }
+      )
+      .subscribe();
   };
 
+  useEffect(() => {
+    fetchCart();
+    cartListener();
+  }, []);
   return (
     <div className="max-w-xl m-auto">
       {cart?.map((item, key) => {

@@ -34,7 +34,6 @@ export default function MenuNav({ session }) {
   };
 
   const setupCartCount = async () => {
-    console.log("hej");
     const cartcounter = supabase
       .channel("custom-all-channel")
       .on(
@@ -43,6 +42,7 @@ export default function MenuNav({ session }) {
           event: "*",
           schema: "public",
           table: "cart",
+          filter: `user_id=eq.${session.user.id}`,
         },
         () => {
           fetchCartCount();
