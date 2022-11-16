@@ -1,7 +1,7 @@
 import MenuItemCard from "../components/consumerView/menu/MenuItemCard";
 import { supabase } from "../utils/supabase";
 import AllergyLegend from "../components/consumerView/menu/allergyLegend/AllergyLegend";
-import MenuNav from "../components/consumerView/menu/navbar/MenuNav";
+import Order from "../components/consumerView/menu/navbar/Order";
 import Logo from "../public/icons/kashmir-logo.svg";
 import Image from "next/image";
 import { TbSeedingOff, TbEgg } from "react-icons/tb";
@@ -117,7 +117,7 @@ export default function Menu({ menuitems, session }) {
           })}
         </div>
       </div>
-      <MenuNav session={session} />
+      <Order session={session} />
     </>
   );
 }

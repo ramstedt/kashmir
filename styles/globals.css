@@ -102,8 +102,14 @@
 
   input,
   select {
-    @apply border-solid;
+    @apply border-2;
     @apply h-8;
+    @apply rounded-lg;
+    @apply border-cobalt;
+  }
+
+  textarea {
+    @apply border-2;
     @apply rounded-lg;
     @apply border-cobalt;
   }

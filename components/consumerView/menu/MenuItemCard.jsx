@@ -19,6 +19,7 @@ export default function FoodItemCard({
 }) {
   const [addConfirm, setAddConfirm] = useState(false);
   const [loading, setLoading] = useState(false);
+
   async function addToCart(prodId, session) {
     setLoading(true);
     // check if item already exists in cart
