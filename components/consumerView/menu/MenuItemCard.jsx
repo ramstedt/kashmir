@@ -67,7 +67,7 @@ export default function FoodItemCard({
                   src={image}
                   layout="fill"
                   objectFit="cover"
-                  alt={`a photo of ${title}`}
+                  alt={`a photo of ${description}`}
                   className="rounded"
                 />
               </div>
@@ -103,7 +103,7 @@ export default function FoodItemCard({
                   className="w-full"
                   layout="fill"
                   objectFit="cover"
-                  alt={`a photo of ${title}`}
+                  alt={`a photo of ${description}`}
                 />
               </div>
               <div className="mx-[6%]">
