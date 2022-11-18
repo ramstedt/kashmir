@@ -90,8 +90,8 @@ export default function FoodItemCard({
               className="bg-black bg-opacity-70 relative top-0 h-[80px] w-screen flex justify-end items-start"
               onClick={close}
             >
-              <button aria-label="go back">
-                <span className="text-white mr-2" onClick={close}>
+              <button aria-label="close">
+                <span className="text-white text-xl mr-2" onClick={close}>
                   X
                 </span>
               </button>

@@ -112,9 +112,18 @@ export default function MenuNav({ session }) {
             contentStyle={{ padding: "0px", border: "none" }}
             arrow={true}
           >
-            <div className="fixed w-full h-full bg-cultured top-0 left-0 p-10">
-              <div className="fixed p-2 top-0 right-0" onClick={closeMenu}>
-                <span className="m-2 text-xl">X</span>
+            <div className="popups fixed w-full h-full bg-cultured top-0 left-0 p-10">
+              <div className="w-full fixed bg-cultured top-0 right-0">
+                <div className="flex w-full">
+                  <div className="w-[94%]"></div>
+                  <button
+                    className="text-xl"
+                    onClick={closeMenu}
+                    aria-label="close"
+                  >
+                    X
+                  </button>
+                </div>
               </div>
               <OrderHistory session={session} />
             </div>
@@ -138,9 +147,18 @@ export default function MenuNav({ session }) {
             }}
             arrow={true}
           >
-            <div className="fixed w-full h-full bg-cultured top-0 left-0 p-5 pt-10">
-              <div className="fixed p-2 top-0 right-0" onClick={closeMenu}>
-                <span className="m-2 text-xl">X</span>
+            <div className="popups fixed w-full h-full bg-cultured top-0 left-0 p-5 pt-10">
+              <div className="w-full fixed bg-cultured top-0 right-0">
+                <div className="flex w-full">
+                  <div className="w-[94%]"></div>
+                  <button
+                    className="text-xl"
+                    onClick={closeMenu}
+                    aria-label="close"
+                  >
+                    X
+                  </button>
+                </div>
               </div>
 
               <div className="max-w-xl m-auto">
@@ -198,40 +216,45 @@ export default function MenuNav({ session }) {
                   })}
                   <div className="my-4 font-MulishBold">TOTAL: {total} kr</div>
                 </div>
-                <form action="/api/checkout_sessions" method="POST">
-                  {/* if the user manipulates the user ID then the POST will fail. The
-            email is only passed to pre-fill the stripe checkout email field. */}
-                  <input
-                    type="hidden"
-                    id="user_email"
-                    name="user_email"
-                    value={session.user.email}
-                  />
-                  <input
-                    type="hidden"
-                    id="user_id"
-                    name="user_id"
-                    value={session.user.id}
-                  />
-                  <div className="flex flex-col items-center max-w-[600px]">
-                    <div className="text-center flex flex-col min-w-full">
-                      <label htmlFor="table">Your table number</label>
-                      <input type="number" id="table" name="table" required />
+
+                {total === 0 ? (
+                  ""
+                ) : (
+                  <form action="/api/checkout_sessions" method="POST">
+                    {/* if the user manipulates the user ID then the POST will fail. The
+              email is only passed to pre-fill the stripe checkout email field. */}
+                    <input
+                      type="hidden"
+                      id="user_email"
+                      name="user_email"
+                      value={session.user.email}
+                    />
+                    <input
+                      type="hidden"
+                      id="user_id"
+                      name="user_id"
+                      value={session.user.id}
+                    />
+                    <div className="flex flex-col items-center max-w-[600px]">
+                      <div className="text-center flex flex-col min-w-full">
+                        <label htmlFor="table">Your table number</label>
+                        <input type="number" id="table" name="table" required />
+                      </div>
+                      <div className="mb-8 text-center flex flex-col min-w-full">
+                        <label htmlFor="extra_info">
+                          Extra instructions (optional)
+                        </label>
+                        <textarea
+                          id="extraInfo"
+                          name="extraInfo"
+                          rows="5"
+                          cols="10"
+                        />
+                      </div>
                     </div>
-                    <div className="mb-8 text-center flex flex-col min-w-full">
-                      <label htmlFor="extra_info">
-                        Extra instructions (optional)
-                      </label>
-                      <textarea
-                        id="extraInfo"
-                        name="extraInfo"
-                        rows="5"
-                        cols="10"
-                      />
-                    </div>
-                  </div>
-                  <Button type="submit" text="Place order" />
-                </form>
+                    <Button type="submit" text="Place order" />
+                  </form>
+                )}
               </div>
             </div>
           </Popup>

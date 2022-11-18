@@ -12,8 +12,7 @@ export const getServerSideProps = async () => {
   const { data: menuitems } = await supabase
     .from("menuitem")
     .select("*, category(name)")
-    .eq("is_available", "true")
-    .gte("stock", 1);
+    .eq("is_available", "true");
 
   return {
     props: {

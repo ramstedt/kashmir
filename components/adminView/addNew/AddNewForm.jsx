@@ -3,12 +3,12 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { supabase } from "../../../utils/supabase";
+import Button from "../../button/Button";
 
 const schema = yup.object().shape({
   title: yup.string().required(),
   description: yup.string().required(),
   price: yup.number().positive().integer().required(),
-  stock: yup.number().positive().integer().required(),
   category: yup.number().required(),
   image: yup
     .mixed()
@@ -78,7 +78,6 @@ export default function AddNewForm() {
           name: form.title,
           description: form.description,
           price: form.price,
-          stock: form.stock,
           category_id: form.category,
           image: publicUrl.data.publicUrl,
           is_vegetarian: form.vegetarian,
@@ -96,8 +95,12 @@ export default function AddNewForm() {
     <>
       <div className="max-w-lg flex flex-col m-auto">
         <h1>Add new item to menu</h1>
+        {isSubmitSuccessful && <p>Item submitted successfully</p>}
         <div className="bg-white p-7 rounded-xl shadow-lg">
-          <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className="flex flex-col space-y-2"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <label htmlFor="title">Title:</label>
             <input
               className="border border-solid border-cobalt rounded-lg"
@@ -120,13 +123,6 @@ export default function AddNewForm() {
               {...register("price", { min: 1, required: true })}
             />
             <p>{errors.price?.message}</p>
-            <label htmlFor="stock">Stock quantity:</label>
-            <input
-              className="border border-solid border-cobalt rounded-lg"
-              type="number"
-              {...register("stock", { min: 1, required: true })}
-            />
-            <p>{errors.stock?.message}</p>
             <label htmlFor="category">Category:</label>
             <select
               className="border border-solid border-cobalt rounded-lg"
@@ -147,8 +143,10 @@ export default function AddNewForm() {
               <label htmlFor="vegan">Is vegan</label>
             </div>
             <div>
-              <input type="checkbox" {...register("glutenFree")} />
-              <label htmlFor="glutenFree">Is gluten free</label>
+              <label htmlFor="glutenFree">
+                <input type="checkbox" {...register("glutenFree")} />
+                Is gluten free
+              </label>
             </div>
             <div>
               <label htmlFor="containsNuts">
@@ -167,7 +165,8 @@ export default function AddNewForm() {
               />
               Available to order
             </label>
-            <button type="submit">Submit</button>
+            <div></div>
+            <Button type="submit" text="Submit" />
             {isSubmitSuccessful && <p>Item submitted successfully</p>}
           </form>
         </div>

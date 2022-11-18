@@ -162,6 +162,11 @@ a {
   /* background: #373a47; */
 }
 
+.popups {
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
   @apply bg-bluebell;
@@ -172,6 +177,9 @@ a {
 .bm-cross-button {
   height: 24px;
   width: 24px;
+}
+.inherit {
+  max-width: inherit;
 }
 
 /* Color/shape of close button cross */

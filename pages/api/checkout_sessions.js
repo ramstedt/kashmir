@@ -19,7 +19,7 @@ export default async function handler(req, res) {
         .select(`quantity, menuitem(id, name, description, price, stock)`)
         .eq("user_id", user_id);
 
-    if (cartItemsFetchError) {
+    if (cartItemsFetchError || cartItems.length === 0) {
       return res.status(500).json({
         message: "Error fetching cart items",
       });
