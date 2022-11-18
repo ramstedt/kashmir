@@ -77,28 +77,28 @@ export default async function handler(req, res) {
       quantity: cartItem.quantity,
     }));
 
-    try {
-      // Create Checkout Sessions
-      const session = await stripe.checkout.sessions.create({
-        customer_email: user_email,
-        line_items,
-        mode: "payment",
-        payment_method_types: ["klarna", "card"],
-        success_url: `${req.headers.origin}/paymentsuccessful?session_id={CHECKOUT_SESSION_ID}&order_id=${order_id}`,
-        cancel_url: `${req.headers.origin}/paymentcancelled`,
-        payment_intent_data: {
-          metadata: {
-            order_id,
-          },
-        },
-      });
+    //   try {
+    //     // Create Checkout Sessions
+    //     const session = await stripe.checkout.sessions.create({
+    //       customer_email: user_email,
+    //       line_items,
+    //       mode: "payment",
+    //       payment_method_types: ["klarna", "card"],
+    //       success_url: `${req.headers.origin}/paymentsuccessful?session_id={CHECKOUT_SESSION_ID}&order_id=${order_id}`,
+    //       cancel_url: `${req.headers.origin}/paymentcancelled`,
+    //       payment_intent_data: {
+    //         metadata: {
+    //           order_id,
+    //         },
+    //       },
+    //     });
 
-      res.redirect(303, session.url);
-    } catch (err) {
-      res.status(err.statusCode || 500).json(err.message);
-    }
-  } else {
-    res.setHeader("Allow", "POST");
-    res.status(405).end("Method Not Allowed");
+    //     res.redirect(303, session.url);
+    //   } catch (err) {
+    //     res.status(err.statusCode || 500).json(err.message);
+    //   }
+    // } else {
+    //   res.setHeader("Allow", "POST");
+    //   res.status(405).end("Method Not Allowed");
   }
 }
