@@ -41,10 +41,34 @@ export default function Menu({ menuitems, session }) {
                   price={product.price}
                   description={product.description}
                   image={product.image}
-                  vegan={product.is_vegan ? <RiLeafFill /> : ""}
-                  vegetarian={product.is_vegetarian ? <TbEgg /> : ""}
-                  nuts={product.contains_nuts ? <GiPeanut /> : ""}
-                  glutenFree={product.is_gluten_free ? <TbSeedingOff /> : ""}
+                  vegan={
+                    product.is_vegan ? (
+                      <RiLeafFill aria-label="vegan product" />
+                    ) : (
+                      ""
+                    )
+                  }
+                  vegetarian={
+                    product.is_vegetarian ? (
+                      <TbEgg aria-label="vegetarian product" />
+                    ) : (
+                      ""
+                    )
+                  }
+                  nuts={
+                    product.contains_nuts ? (
+                      <GiPeanut aria-label="product contains nuts" />
+                    ) : (
+                      ""
+                    )
+                  }
+                  glutenFree={
+                    product.is_gluten_free ? (
+                      <TbSeedingOff aria-label="gluten free product" />
+                    ) : (
+                      ""
+                    )
+                  }
                   addToCart={() => addItemToCart(product)}
                   session={session}
                 />
@@ -62,10 +86,34 @@ export default function Menu({ menuitems, session }) {
                   price={product.price}
                   description={product.description}
                   image={product.image}
-                  vegan={product.is_vegan ? <RiLeafFill /> : ""}
-                  vegetarian={product.is_vegetarian ? <TbEgg /> : ""}
-                  nuts={product.contains_nuts ? <GiPeanut /> : ""}
-                  glutenFree={product.is_gluten_free ? <TbSeedingOff /> : ""}
+                  vegan={
+                    product.is_vegan ? (
+                      <RiLeafFill aria-label="vegan product" />
+                    ) : (
+                      ""
+                    )
+                  }
+                  vegetarian={
+                    product.is_vegetarian ? (
+                      <TbEgg aria-label="vegetarian product" />
+                    ) : (
+                      ""
+                    )
+                  }
+                  nuts={
+                    product.contains_nuts ? (
+                      <GiPeanut aria-label="product contains nuts" />
+                    ) : (
+                      ""
+                    )
+                  }
+                  glutenFree={
+                    product.is_gluten_free ? (
+                      <TbSeedingOff aria-label="gluten free product" />
+                    ) : (
+                      ""
+                    )
+                  }
                   addToCart={() => addItemToCart(product)}
                   session={session}
                 />
@@ -83,10 +131,34 @@ export default function Menu({ menuitems, session }) {
                   price={product.price}
                   description={product.description}
                   image={product.image}
-                  vegan={product.is_vegan ? <RiLeafFill /> : ""}
-                  vegetarian={product.is_vegetarian ? <TbEgg /> : ""}
-                  nuts={product.contains_nuts ? <GiPeanut /> : ""}
-                  glutenFree={product.is_gluten_free ? <TbSeedingOff /> : ""}
+                  vegan={
+                    product.is_vegan ? (
+                      <RiLeafFill aria-label="vegan product" />
+                    ) : (
+                      ""
+                    )
+                  }
+                  vegetarian={
+                    product.is_vegetarian ? (
+                      <TbEgg aria-label="vegetarian product" />
+                    ) : (
+                      ""
+                    )
+                  }
+                  nuts={
+                    product.contains_nuts ? (
+                      <GiPeanut aria-label="product contains nuts" />
+                    ) : (
+                      ""
+                    )
+                  }
+                  glutenFree={
+                    product.is_gluten_free ? (
+                      <TbSeedingOff aria-label="gluten free product" />
+                    ) : (
+                      ""
+                    )
+                  }
                   addToCart={() => addItemToCart(product)}
                   session={session}
                 />
@@ -104,10 +176,34 @@ export default function Menu({ menuitems, session }) {
                   price={product.price}
                   description={product.description}
                   image={product.image}
-                  vegan={product.is_vegan ? <RiLeafFill /> : ""}
-                  vegetarian={product.is_vegetarian ? <TbEgg /> : ""}
-                  nuts={product.contains_nuts ? <GiPeanut /> : ""}
-                  glutenFree={product.is_gluten_free ? <TbSeedingOff /> : ""}
+                  vegan={
+                    product.is_vegan ? (
+                      <RiLeafFill aria-label="vegan product" />
+                    ) : (
+                      ""
+                    )
+                  }
+                  vegetarian={
+                    product.is_vegetarian ? (
+                      <TbEgg aria-label="vegetarian product" />
+                    ) : (
+                      ""
+                    )
+                  }
+                  nuts={
+                    product.contains_nuts ? (
+                      <GiPeanut aria-label="product contains nuts" />
+                    ) : (
+                      ""
+                    )
+                  }
+                  glutenFree={
+                    product.is_gluten_free ? (
+                      <TbSeedingOff aria-label="gluten free product" />
+                    ) : (
+                      ""
+                    )
+                  }
                   addToCart={() => addItemToCart(product)}
                   session={session}
                 />

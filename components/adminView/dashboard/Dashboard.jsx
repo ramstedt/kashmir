@@ -1,7 +1,5 @@
 import { supabase } from "../../../utils/supabase";
 import { useState, useEffect } from "react";
-import { BsFillCheckCircleFill } from "react-icons/bs";
-import Button from "../../button/Button";
 
 export default function DashboardCard() {
   const [orders, setOrders] = useState([]);
@@ -40,6 +38,14 @@ export default function DashboardCard() {
       .subscribe();
   };
 
+  //fulfil the order
+  const fulfillOrder = async (order) => {
+    await supabase
+      .from("order")
+      .update({ order_fulfilled: true })
+      .eq("id", order.id);
+  };
+
   useEffect(() => {
     fetchOrders();
     setupOrderSubscription();
@@ -53,6 +59,7 @@ export default function DashboardCard() {
           <tr className="bg-spaceCadet text-white text-left ">
             <th>Table</th>
             <th>Order items</th>
+            <th>Special instructions</th>
             <th>Complete</th>
           </tr>
         </thead>
@@ -60,16 +67,20 @@ export default function DashboardCard() {
           {orders.map((order, key) => (
             <tr key={key}>
               <td>{order.table}</td>
-              <td>
+              <td className="whitespace-nowrap">
                 {order.orderitem.map((item, key) => (
-                  <div key={key}>
+                  <div key={key} className="min-w-fit">
                     {item.quantity} of {item.menuitem.name}
                   </div>
                 ))}
               </td>
+              <td>{order.extra_info}</td>
               <td>
-                <button>
-                  <BsFillCheckCircleFill />
+                <button
+                  onClick={() => fulfillOrder(order)}
+                  className="bg-spaceCadet text-white border-solid border-2 p-2 border-spaceCadet rounded-2xl"
+                >
+                  complete
                 </button>
               </td>
             </tr>

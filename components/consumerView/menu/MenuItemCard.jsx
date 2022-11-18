@@ -4,6 +4,7 @@ import { supabase } from "../../../utils/supabase";
 import { useState } from "react";
 import Shoppingbasket from "../../../public/icons/shopping-basket.gif";
 import Spinner from "../../../public/icons/spinner.svg";
+import Button from "../../button/Button";
 
 export default function FoodItemCard({
   title,
@@ -16,6 +17,7 @@ export default function FoodItemCard({
   productId,
   session,
   image,
+  admin,
 }) {
   const [addConfirm, setAddConfirm] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -116,36 +118,49 @@ export default function FoodItemCard({
                   <div className="my-3 flex">
                     {vegan} {vegetarian} {nuts} {glutenFree}
                   </div>
-                  <div className="flex justify-start mt-10">
-                    <button
-                      onClick={() => addToCart(productId, session)}
-                      className="bg-spaceCadet text-white border-solid border-2 border-spaceCadet px-2 py-2 rounded-2xl w-[150px]"
-                    >
-                      {loading ? (
-                        <Image
-                          src={Spinner}
-                          alt="loading"
-                          height="19"
-                          width="19"
-                        />
-                      ) : !addConfirm ? (
-                        "Add to order"
+                  <div className="flex justify-between">
+                    <div className="flex justify-start mt-10">
+                      <button
+                        onClick={() => addToCart(productId, session)}
+                        className="bg-spaceCadet text-white border-solid border-2 border-spaceCadet px-2 py-2 rounded-2xl w-[150px]"
+                      >
+                        {loading ? (
+                          <Image
+                            src={Spinner}
+                            alt="loading"
+                            height="19"
+                            width="19"
+                          />
+                        ) : !addConfirm ? (
+                          "Add to order"
+                        ) : (
+                          "Added"
+                        )}
+                      </button>
+                      {!addConfirm ? (
+                        ""
                       ) : (
-                        "Added"
+                        <div className="flex items-center bg-white w-fit rounded">
+                          <span className="text-center">
+                            <Image
+                              src={Shoppingbasket}
+                              alt="animated icon showing a shopping basket with food bouncing inside"
+                              width="40"
+                              height="40"
+                            />
+                          </span>
+                        </div>
                       )}
-                    </button>
-                    {!addConfirm ? (
+                    </div>
+                    {admin ? (
                       ""
                     ) : (
-                      <div className="flex items-center bg-white w-fit rounded">
-                        <span className="text-center">
-                          <Image
-                            src={Shoppingbasket}
-                            alt="animated icon showing a shopping basket with food bouncing inside"
-                            width="40"
-                            height="40"
-                          />
-                        </span>
+                      <div className="mt-2 border rounded w-fit p-2 bg-white">
+                        <h2>Admin options</h2>
+                        <div className="flex flex-col">
+                          <button>Update</button>
+                          <button>Delete</button>
+                        </div>
                       </div>
                     )}
                   </div>

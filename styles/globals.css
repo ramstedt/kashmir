@@ -182,6 +182,11 @@ a {
   max-width: inherit;
 }
 
+button:hover {
+  @apply bg-cultured;
+  @apply text-spaceCadet;
+}
+
 /* Color/shape of close button cross */
 .bm-cross {
   @apply bg-cultured;
