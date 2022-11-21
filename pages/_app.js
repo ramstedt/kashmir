@@ -49,7 +49,7 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
-    <div className="min-h-[100%] relative pb-[500px]">
+    <div className="min-h-[100%] relative pb-[440px] md:pb-[250px]">
       {!session ? (
         <Auth />
       ) : (

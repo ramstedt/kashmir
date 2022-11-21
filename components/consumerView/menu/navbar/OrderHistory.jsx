@@ -72,8 +72,18 @@ export default function OrderHistory({ session }) {
       {orders.map((order, key) => {
         if (order.order_fulfilled) {
           return (
-            <div key={key}>
-              {order.id} of {order.table}
+            <div key={key} className=" shadow-md rounded mb-3 p-2 border">
+              <h4 className="text-cobalt">
+                Order: {order.id} to Table {order.table}
+              </h4>
+
+              <div>
+                {order.orderitem.map((order, key) => (
+                  <p key={key}>
+                    {order.quantity} {order.menuitem.name}
+                  </p>
+                ))}
+              </div>
             </div>
           );
         }
