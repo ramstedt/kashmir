@@ -1,7 +1,11 @@
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { BsTelephoneFill } from "react-icons/bs";
+import {
+  BsTelephoneFill,
+  BsTwitter,
+  BsFacebook,
+  BsLinkedin,
+} from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
-import { BsTwitter, BsFacebook, BsLinkedin } from "react-icons/Bs";
 
 export default function Footer() {
   return (
