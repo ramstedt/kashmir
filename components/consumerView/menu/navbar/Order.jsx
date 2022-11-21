@@ -101,7 +101,7 @@ export default function MenuNav({ session }) {
           <Popup
             trigger={
               <div className="menu-item w-[50%] flex h-full items-center justify-center text-center">
-                <button className="h-full w-full hover:bg-spaceCadet">
+                <button className="h-full w-full hover:bg-cobalt hover:text-honey">
                   Orders
                 </button>
               </div>
@@ -133,7 +133,9 @@ export default function MenuNav({ session }) {
           <Popup
             trigger={
               <div className="menu-item w-[50%] flex h-full items-center justify-center text-center">
-                <button className="h-full w-full">Cart ({quantity})</button>
+                <button className="h-full w-full hover:bg-cobalt hover:text-honey">
+                  Cart ({quantity})
+                </button>
               </div>
             }
             position="top"

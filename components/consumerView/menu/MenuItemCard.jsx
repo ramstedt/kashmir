@@ -118,7 +118,7 @@ export default function FoodItemCard({
                   <div className="my-3 flex">
                     {vegan} {vegetarian} {nuts} {glutenFree}
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between items-end">
                     <div className="flex justify-start mt-10">
                       <button
                         onClick={() => addToCart(productId, session)}
@@ -155,11 +155,9 @@ export default function FoodItemCard({
                     {admin ? (
                       ""
                     ) : (
-                      <div className="mt-2 border rounded w-fit p-2 bg-white">
-                        <h2>Admin options</h2>
+                      <div className="border rounded w-fit h-fit p-2 bg-white">
                         <div className="flex flex-col">
-                          <button>Update</button>
-                          <button>Delete</button>
+                          <button>Edit</button>
                         </div>
                       </div>
                     )}

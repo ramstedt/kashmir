@@ -142,23 +142,25 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
+a:hover {
+  @apply text-honey;
+}
 .menuItem::first-letter {
   text-transform: capitalize;
 }
 
 /* Position and sizing of burger button */
 .bm-burger-button {
-  position: fixed;
+  position: absolute;
   width: 30px;
   height: 25px;
-  right: 20px;
+  left: 20px;
   top: 20px;
 }
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  @apply bg-cobalt;
+  @apply bg-cobalt rounded border border-white p-[1px] w-9;
   /* background: #373a47; */
 }
 
@@ -204,7 +206,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* General sidebar styles */
 .bm-menu {
-  @apply bg-spaceCadet;
+  @apply bg-cobalt;
   /* background: #373a47; */
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;

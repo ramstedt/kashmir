@@ -21,7 +21,7 @@ export default function Auth() {
   };
   return (
     <>
-      <div className="bg-backgroundsm bg-fixed bg-center bg-cover bg-no-repeat h-full text-cobalt">
+      <div className="bg-backgroundsm bg-fixed bg-center bg-cover bg-no-repeat h-[90vh] text-cobalt">
         <div className="flex flex-col h-full items-center">
           <div className="bg-cultured py-6 bg-opacity-80 mx-2 rounded-md max-w-md mt-[50px]">
             <div className="mx-2 flex flex-col items-center">
@@ -45,7 +45,7 @@ export default function Auth() {
                     type="email"
                     id="email"
                     name="email"
-                    className="h-8 text-center border-black"
+                    className="h-8 text-center border-cobalt"
                   />
                   <span className="text-[75%]">
                     We only save your email address for order purposes

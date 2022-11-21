@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Auth from "../components/auth/Auth";
 import { supabase } from "../utils/supabase";
 import AdminNav from "../components/adminView/navbar/Navbar";
+import Footer from "../components/consumerView/footer/Footer";
 
 function MyApp({ Component, pageProps }) {
   const [session, setSession] = useState(null);
@@ -53,9 +54,11 @@ function MyApp({ Component, pageProps }) {
         <Auth />
       ) : (
         <>
+          <AdminNav />
           <Component {...pageProps} session={session} admin={admin} />
         </>
       )}
+      <Footer />
     </>
   );
 }

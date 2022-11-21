@@ -58,7 +58,8 @@ export default function PaymentSuccessful({ session }) {
         <p>
           The kitchen has recieved your order.
           <br />
-          Your order number is: {order[0]?.id}
+          Your order number is:{" "}
+          <span className="text-bold">{order[0]?.id}</span>
         </p>
         <p>You ordered:</p>
         <div>

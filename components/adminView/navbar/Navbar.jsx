@@ -6,7 +6,7 @@ export default function AdminNav() {
   return (
     <>
       <Menu>
-        <div className="mb-4">Admin Navigation</div>
+        <div className="mb-4 text-sm">Admin</div>
         <Link href="/admin/dashboard">Dashboard</Link>
         <Link href="/admin/addnew">Add new</Link>
         <Link href="/">Orders</Link>
