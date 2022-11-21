@@ -56,7 +56,7 @@ export default function Auth() {
                     type="submit"
                     text={
                       loading ? (
-                        <Image src={Spinner} alt="sipnner" height="19" />
+                        <Image src={Spinner} alt="spinner" height="19" />
                       ) : (
                         "Send Link"
                       )

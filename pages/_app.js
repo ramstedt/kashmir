@@ -49,7 +49,7 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
-    <>
+    <div className="min-h-[100%] relative pb-[500px]">
       {!session ? (
         <Auth />
       ) : (
@@ -59,7 +59,7 @@ function MyApp({ Component, pageProps }) {
         </>
       )}
       <Footer />
-    </>
+    </div>
   );
 }
 
