@@ -25,8 +25,11 @@ function MyApp({ Component, pageProps }) {
             .select("is_admin")
             .limit(1)
             .eq("user_id", session.user.id);
-          if (admin) {
-            setIsAdmin(true);
+
+          if (admin.length === 1) {
+            if (admin[0].is_admin === true) {
+              setIsAdmin(true);
+            }
           } else {
             setIsAdmin(false);
           }
@@ -54,7 +57,7 @@ function MyApp({ Component, pageProps }) {
         <Auth />
       ) : (
         <>
-          <AdminNav />
+          {admin ? <AdminNav /> : ""}
           <Component {...pageProps} session={session} admin={admin} />
         </>
       )}

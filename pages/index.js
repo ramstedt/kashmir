@@ -20,9 +20,11 @@ export const getServerSideProps = async () => {
     },
   };
 };
-export default function Menu({ menuitems, session }) {
+
+export default function Menu({ menuitems, session, admin }) {
+  console.log(admin);
   return (
-    <div className="max-w-lg flex flex-col m-auto bg-red">
+    <div className="max-w-lg flex flex-col m-auto">
       <div className="my-2">
         <Image src={Logo} alt="logo" height="500" />
       </div>

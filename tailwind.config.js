@@ -61,7 +61,6 @@ module.exports = {
         honey: "#FFB01D",
         pumpkin: "#FF7B2C",
         cultured: "#F7F7F7",
-        hover: "#162ADE",
       },
       boxShadow: {
         shadow:

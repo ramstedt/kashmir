@@ -93,84 +93,88 @@ export default function AddNewForm() {
 
   return (
     <>
-      <div className="max-w-lg flex flex-col m-auto">
-        <h1>Add new item to menu</h1>
-        {isSubmitSuccessful && <p>Item submitted successfully</p>}
-        <div className="bg-white p-7 rounded-xl shadow-lg">
-          <form
-            className="flex flex-col space-y-2"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <label htmlFor="title">Title:</label>
-            <input
-              className="border border-solid border-cobalt rounded-lg"
-              {...register("title", { required: true })}
-            />
-            <p>{errors.title?.message}</p>
-            <label htmlFor="description">Description:</label>
-            <textarea
-              rows="5"
-              cols="10"
-              className="border border-solid border-cobalt rounded-lg"
-              type="text"
-              {...register("description", { required: true })}
-            />
-            <p>{errors.description?.message}</p>
-            <label htmlFor="price">Price:</label>
-            <input
-              className="border border-solid border-cobalt rounded-lg"
-              type="number"
-              {...register("price", { min: 1, required: true })}
-            />
-            <p>{errors.price?.message}</p>
-            <label htmlFor="category">Category:</label>
-            <select
-              className="border border-solid border-cobalt rounded-lg"
-              {...register("category", { required: true })}
+      {admin ? (
+        ""
+      ) : (
+        <div className="max-w-lg flex flex-col m-auto">
+          <h1>Add new item to menu</h1>
+          {isSubmitSuccessful && <p>Item submitted successfully</p>}
+          <div className="bg-white p-7 rounded-xl shadow-lg">
+            <form
+              className="flex flex-col space-y-2"
+              onSubmit={handleSubmit(onSubmit)}
             >
-              {categories?.map((category, key) => (
-                <option key={key} value={category.id}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
-            <div>
-              <input type="checkbox" {...register("vegetarian")} />
-              <label htmlFor="vegetarian">Is vegetarian</label>
-            </div>
-            <div>
-              <input type="checkbox" {...register("vegan")} />
-              <label htmlFor="vegan">Is vegan</label>
-            </div>
-            <div>
-              <label htmlFor="glutenFree">
-                <input type="checkbox" {...register("glutenFree")} />
-                Is gluten free
-              </label>
-            </div>
-            <div>
-              <label htmlFor="containsNuts">
-                <input type="checkbox" {...register("containsNuts")} />
-                Contains nuts
-              </label>
-            </div>
-            <label htmlFor="image">Image:</label>
-            <input type="file" {...register("image", { required: true })} />
-            <p>{errors.image?.message}</p>
-            <label htmlFor="available">
+              <label htmlFor="title">Title:</label>
               <input
-                type="checkbox"
-                accept="image/*"
-                {...register("available")}
+                className="border border-solid border-cobalt rounded-lg"
+                {...register("title", { required: true })}
               />
-              Available to order
-            </label>
-            <div></div>
-            <Button type="submit" text="Submit" />
-            {isSubmitSuccessful && <p>Item submitted successfully</p>}
-          </form>
+              <p>{errors.title?.message}</p>
+              <label htmlFor="description">Description:</label>
+              <textarea
+                rows="5"
+                cols="10"
+                className="border border-solid border-cobalt rounded-lg"
+                type="text"
+                {...register("description", { required: true })}
+              />
+              <p>{errors.description?.message}</p>
+              <label htmlFor="price">Price:</label>
+              <input
+                className="border border-solid border-cobalt rounded-lg"
+                type="number"
+                {...register("price", { min: 1, required: true })}
+              />
+              <p>{errors.price?.message}</p>
+              <label htmlFor="category">Category:</label>
+              <select
+                className="border border-solid border-cobalt rounded-lg"
+                {...register("category", { required: true })}
+              >
+                {categories?.map((category, key) => (
+                  <option key={key} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+              <div>
+                <input type="checkbox" {...register("vegetarian")} />
+                <label htmlFor="vegetarian">Is vegetarian</label>
+              </div>
+              <div>
+                <input type="checkbox" {...register("vegan")} />
+                <label htmlFor="vegan">Is vegan</label>
+              </div>
+              <div>
+                <label htmlFor="glutenFree">
+                  <input type="checkbox" {...register("glutenFree")} />
+                  Is gluten free
+                </label>
+              </div>
+              <div>
+                <label htmlFor="containsNuts">
+                  <input type="checkbox" {...register("containsNuts")} />
+                  Contains nuts
+                </label>
+              </div>
+              <label htmlFor="image">Image:</label>
+              <input type="file" {...register("image", { required: true })} />
+              <p>{errors.image?.message}</p>
+              <label htmlFor="available">
+                <input
+                  type="checkbox"
+                  accept="image/*"
+                  {...register("available")}
+                />
+                Available to order
+              </label>
+              <div></div>
+              <Button type="submit" text="Submit" />
+              {isSubmitSuccessful && <p>Item submitted successfully</p>}
+            </form>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

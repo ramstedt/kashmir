@@ -3,7 +3,6 @@ import { useRouter, useLocation } from "next/router";
 import Cooking from "../public/icons/cooking.gif";
 import Image from "next/image";
 import { supabase } from "../utils/supabase";
-import Button from "../components/button/Button";
 import Link from "next/link";
 
 export default function PaymentSuccessful({ session }) {
